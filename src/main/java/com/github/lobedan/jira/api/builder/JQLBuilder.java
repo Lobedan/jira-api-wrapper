@@ -2,7 +2,7 @@ package com.github.lobedan.jira.api.builder;
 
 import java.util.List;
 
-import com.github.lobedan.jira.api.ParameterCountException;
+import com.github.lobedan.jira.api.exceptions.ParameterCountException;
 import com.github.lobedan.jira.api.domain.JiraDate;
 import com.github.lobedan.jira.api.types.OrderType;
 

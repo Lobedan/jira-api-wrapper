@@ -1,4 +1,4 @@
-package com.github.lobedan.jira.api;
+package com.github.lobedan.jira.api.exceptions;
 
 /**
  * exception is thrown when a method has not enough parameters, when they need a array
