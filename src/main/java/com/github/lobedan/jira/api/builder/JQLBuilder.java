@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.github.lobedan.jira.api.ParameterCountException;
 import com.github.lobedan.jira.api.domain.JiraDate;
+import com.github.lobedan.jira.api.types.OrderType;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -45,7 +46,7 @@ import org.apache.logging.log4j.Logger;
  * @see #contains(List values)
  * @see #contains(Object... values)
  * @see #doesNotContain(List values)
- * @see #doesNotContain(Object...values)
+ * @see #doesNotContain(Object... values)
  * @see #is(Object value)
  * @see #isNot(Object value)
  * @see #was(Object value)
@@ -94,18 +95,22 @@ import org.apache.logging.log4j.Logger;
  * @see com.github.lobedan.jira.api.builder.JQLStaticBuilder#on(String value)
  * @see #from(Object value)
  * @see #to(Object value)
- * @see #on(com.github.lobedan.jira.api.domain.JiraDate date)
  * <p/>
  * <p/>
- * orderBy is a endpoint in the query it will just sort the results after the
- * {@link com.github.lobedan.jira.api.enumeration.OrderType} you have set
- * <p/>
- * but to make it more readable like operations you can use the desc() for highest to lowest or asc() for
- * lowest to highest sorting
- * @see #orderBy()
- * @see #asc() : OrderType.ASC
- * @see #desc(): OrderType.DESC
- * <p/>
+ * orderBy is a endpoint in the query it will just sort the results after the given order tyüe
+ * to make it more readable like operations you can use the desc() for highest to lowest or asc() for
+ * lowest to highest sorting provided by {@link com.github.lobedan.jira.api.builder.JQLStaticBuilder}
+ *
+ * these methods will return the appropriate {@link com.github.lobedan.jira.api.types.OrderType}
+ *
+ * @see #orderBy(List values, OrderType orderType)
+ * @see #orderBy(OrderType orderType, Object... values)
+ * @see #orderBy(String fieldname, OrderType orderType)
+ *
+ * @see com.github.lobedan.jira.api.builder.JQLStaticBuilder#asc() : OrderType.ASC
+ * @see com.github.lobedan.jira.api.builder.JQLStaticBuilder#desc() : OrderType.DESC
+ *
+ *
  * for more information about how to combine the {@link JiraUrlBuilder} with JQLBuilder
  * refer to the {@link JiraUrlBuilder class}
  * @see JiraUrlBuilder
@@ -325,18 +330,18 @@ public class JQLBuilder {
     return this;
   }
 
-  public JQLBuilder orderBy(List<Object> values, String orderType) {
+  public JQLBuilder orderBy(List<Object> values, OrderType orderType) {
     return orderBy(orderType, values.toArray(new Object[values.size()]));
   }
 
-  public JQLBuilder orderBy(String orderType, Object... values) {
+  public JQLBuilder orderBy(OrderType orderType, Object... values) {
     verifyParams("ORDER BY", values);
-    add(" order by " + commaSeparatedList(values) + " " + orderType);
+    add(" order by " + commaSeparatedList(values) + " " + orderType.toString().toLowerCase());
     return this;
   }
 
-  public JQLBuilder orderBy(String fieldName, String orderType) {
-    add(" order by " + fieldName + " " + orderType);
+  public JQLBuilder orderBy(String fieldName, OrderType orderType) {
+    add(" order by " + fieldName + " " + orderType.toString().toLowerCase());
     return this;
   }
 

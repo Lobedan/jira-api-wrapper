@@ -1,6 +1,7 @@
 package com.github.lobedan.jira.api.builder;
 
 import com.github.lobedan.jira.api.domain.JiraDate;
+import com.github.lobedan.jira.api.types.OrderType;
 
 /**
  * provides static methods for {@link com.github.lobedan.jira.api.builder.JQLBuilder} because
@@ -9,7 +10,7 @@ import com.github.lobedan.jira.api.domain.JiraDate;
  * need to have a inline of JQLBuilder
  *
  * @author svenklemmer
- * @since 1.0.0
+ * @since 0.1.0
  */
 public class JQLStaticBuilder {
 
@@ -42,11 +43,11 @@ public class JQLStaticBuilder {
     return "on " + value.getDateAsString();
   }
 
-  public static String asc() {
-    return "asc";
+  public static OrderType asc() {
+    return OrderType.ASC;
   }
 
-  public static String desc() {
-    return "desc";
+  public static OrderType desc() {
+    return OrderType.DESC;
   }
 }
