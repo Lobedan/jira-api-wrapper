@@ -1,4 +1,4 @@
-package com.github.lobedan.jira.api;
+package com.github.lobedan.jira.api.domain;
 
 import com.github.lobedan.jira.api.domain.JiraDate;
 import org.junit.Before;
