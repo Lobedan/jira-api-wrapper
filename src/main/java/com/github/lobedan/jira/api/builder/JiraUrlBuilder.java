@@ -2,6 +2,7 @@ package com.github.lobedan.jira.api.builder;
 
 import java.net.URI;
 
+import com.github.lobedan.jira.api.types.ExpandTypes;
 import com.github.lobedan.jira.api.types.ProtocolType;
 import com.github.lobedan.jira.api.util.StringUtils;
 
@@ -11,6 +12,8 @@ import org.apache.logging.log4j.Logger;
 import gumi.builders.UrlBuilder;
 
 /**
+ * builds a url to access your jira instance
+ *
  * @author svenklemmer
  * @since 0.1.0
  */
@@ -59,6 +62,11 @@ public class JiraUrlBuilder implements Builder<URI> {
   }
 
   public JiraUrlBuilder expand(String... values) {
+    builder = builder.addParameter("expand", StringUtils.commaSeparatedList(values));
+    return this;
+  }
+
+  public JiraUrlBuilder expand(ExpandTypes... values) {
     builder = builder.addParameter("expand", StringUtils.commaSeparatedList(values));
     return this;
   }

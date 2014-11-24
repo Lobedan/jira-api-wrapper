@@ -231,7 +231,7 @@ public class JQLBuilder implements Builder<String> {
   public JQLBuilder contains(Object... values) {
     verifyParams("CONTAINS", values);
     add(" ~ ");
-    return quote(StringUtils.whitespaceSeparatedList(values));
+    return quote(StringUtils.whiteSpaceSeparatedList(values));
   }
 
   public JQLBuilder doesNotContain(List<Object> values) {
@@ -241,7 +241,7 @@ public class JQLBuilder implements Builder<String> {
   public JQLBuilder doesNotContain(Object... values) {
     verifyParams("NOT CONTAINS", values);
     add(" !~ ");
-    return quote(StringUtils.whitespaceSeparatedList(values));
+    return quote(StringUtils.whiteSpaceSeparatedList(values));
   }
 
   public JQLBuilder is(Object value) {

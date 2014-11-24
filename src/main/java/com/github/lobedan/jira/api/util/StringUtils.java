@@ -1,5 +1,7 @@
 package com.github.lobedan.jira.api.util;
 
+import java.util.List;
+
 /**
  * some usefull methods for working with strings
  *
@@ -8,6 +10,12 @@ package com.github.lobedan.jira.api.util;
  */
 public class StringUtils {
 
+  /**
+   * Converts a object into a string
+   *
+   * @param value object to convert
+   * @return String value of object
+   */
   public static String stringify(Object value) {
     if (value instanceof Boolean) {
       boolean b = (Boolean) value;
@@ -21,12 +29,20 @@ public class StringUtils {
         return "" + (Long) value;
       } else if (value instanceof Float) {
         return "" + (Float) value;
+      } else if (value instanceof Enum) {
+        return value.toString().toLowerCase();
       } else {
-        return (String) value;
+        return value.toString();
       }
     }
   }
 
+  /**
+   * creates a comma separated list out of objects in strings
+   *
+   * @param values array of objects
+   * @return comma separated list
+   */
   public static String commaSeparatedList(Object... values) {
     String toAdd = "";
     for (int i = 0; i < values.length; i++) {
@@ -39,7 +55,23 @@ public class StringUtils {
     return toAdd;
   }
 
-  public static String whitespaceSeparatedList(Object... values) {
+  /**
+   * creates a comma separated list out of objects in string
+   *
+   * @param values list of objects
+   * @return comma separated list
+   */
+  public static String commaSeparatedList(List<Object> values) {
+    return commaSeparatedList(values.toArray(new Object[values.size()]));
+  }
+
+  /**
+   * almost the same list #commaSeparatedList but without comma
+   *
+   * @param values array of objects
+   * @return list of separated items
+   */
+  public static String whiteSpaceSeparatedList(Object... values) {
     String toAdd = "";
     for (int i = 0; i < values.length; i++) {
       if (i == values.length - 1) {
@@ -49,5 +81,15 @@ public class StringUtils {
       }
     }
     return toAdd;
+  }
+
+  /**
+   * almost the same list #commaSeparatedList but without comma
+   *
+   * @param values list of objects
+   * @return list of separated items
+   */
+  public static String whiteSpaceSeparatedList(List<Object> values) {
+    return whiteSpaceSeparatedList(values.toArray(new Object[values.size()]));
   }
 }
