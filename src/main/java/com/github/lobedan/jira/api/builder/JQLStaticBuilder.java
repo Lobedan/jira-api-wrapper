@@ -24,7 +24,13 @@ public class JQLStaticBuilder {
     if (builder == null) {
       builder = create();
     }
-    return builder.field("person");
+    return builder.field(fieldName);
+  }
+
+  public static void clear() {
+    if (builder != null) {
+      builder.clear();
+    }
   }
 
   public static String nul() {

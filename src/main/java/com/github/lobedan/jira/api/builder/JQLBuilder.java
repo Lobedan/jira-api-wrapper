@@ -5,6 +5,7 @@ import java.util.List;
 import com.github.lobedan.jira.api.exceptions.ParameterCountException;
 import com.github.lobedan.jira.api.domain.JiraDate;
 import com.github.lobedan.jira.api.types.OrderType;
+import com.github.lobedan.jira.api.util.StringUtils;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -125,7 +126,7 @@ import org.apache.logging.log4j.Logger;
  * TODO: maybe provide different field methods but that will not support customfields but can be more readable
  * @since 0.1.0
  */
-public class JQLBuilder {
+public class JQLBuilder implements Builder<String> {
   private static final Logger LOGGER = LogManager.getLogger(JQLBuilder.class);
 
   private StringBuilder sb;
@@ -174,32 +175,32 @@ public class JQLBuilder {
   }
 
   public JQLBuilder equal(Object value) {
-    add(" = " + stringify(value));
+    add(" = " + StringUtils.stringify(value));
     return this;
   }
 
   public JQLBuilder notEqual(Object value) {
-    add(" != " + stringify(value));
+    add(" != " + StringUtils.stringify(value));
     return this;
   }
 
   public JQLBuilder greaterThan(Object value) {
-    add(" > " + stringify(value));
+    add(" > " + StringUtils.stringify(value));
     return this;
   }
 
   public JQLBuilder greaterThanEquals(Object value) {
-    add(" >= " + stringify(value));
+    add(" >= " + StringUtils.stringify(value));
     return this;
   }
 
   public JQLBuilder lessThan(Object value) {
-    add(" < " + stringify(value));
+    add(" < " + StringUtils.stringify(value));
     return this;
   }
 
   public JQLBuilder lessThanEquals(Object value) {
-    add(" <= " + stringify(value));
+    add(" <= " + StringUtils.stringify(value));
     return this;
   }
 
@@ -210,7 +211,7 @@ public class JQLBuilder {
   public JQLBuilder in(Object... values) {
     verifyParams("IN", values);
     add(" in ");
-    return brackets(commaSeparatedList(values));
+    return brackets(StringUtils.commaSeparatedList(values));
   }
 
   public JQLBuilder notIn(List<Object> values) {
@@ -220,7 +221,7 @@ public class JQLBuilder {
   public JQLBuilder notIn(Object... values) {
     verifyParams("NOT IN", values);
     add(" not in ");
-    return brackets(commaSeparatedList(values));
+    return brackets(StringUtils.commaSeparatedList(values));
   }
 
   public JQLBuilder contains(List<Object> values) {
@@ -230,7 +231,7 @@ public class JQLBuilder {
   public JQLBuilder contains(Object... values) {
     verifyParams("CONTAINS", values);
     add(" ~ ");
-    return quote(wsSeparatedList(values));
+    return quote(StringUtils.whitespaceSeparatedList(values));
   }
 
   public JQLBuilder doesNotContain(List<Object> values) {
@@ -240,26 +241,26 @@ public class JQLBuilder {
   public JQLBuilder doesNotContain(Object... values) {
     verifyParams("NOT CONTAINS", values);
     add(" !~ ");
-    return quote(wsSeparatedList(values));
+    return quote(StringUtils.whitespaceSeparatedList(values));
   }
 
   public JQLBuilder is(Object value) {
-    add(" is " + stringify(value));
+    add(" is " + StringUtils.stringify(value));
     return this;
   }
 
   public JQLBuilder isNot(Object value) {
-    add(" is not " + stringify(value));
+    add(" is not " + StringUtils.stringify(value));
     return this;
   }
 
   public JQLBuilder was(Object value) {
-    add(" was " + stringify(value));
+    add(" was " + StringUtils.stringify(value));
     return this;
   }
 
   public JQLBuilder wasNot(Object value) {
-    add(" WAS NOT " + stringify(value));
+    add(" WAS NOT " + StringUtils.stringify(value));
     return this;
   }
 
@@ -270,7 +271,7 @@ public class JQLBuilder {
   public JQLBuilder wasIn(Object... values) {
     verifyParams("WAS IN", values);
     add(" WAS IN ");
-    return brackets(commaSeparatedList(values));
+    return brackets(StringUtils.commaSeparatedList(values));
   }
 
   public JQLBuilder wasNotIn(List<Object> values) {
@@ -280,7 +281,7 @@ public class JQLBuilder {
   public JQLBuilder wasNotIn(Object... values) {
     verifyParams("WAS NOT IN", values);
     add(" WAS NOT IN ");
-    return brackets(commaSeparatedList(values));
+    return brackets(StringUtils.commaSeparatedList(values));
   }
 
   public JQLBuilder changed() {
@@ -312,12 +313,12 @@ public class JQLBuilder {
   }
 
   public JQLBuilder from(Object value) {
-    add(" FROM " + stringify(value));
+    add(" FROM " + StringUtils.stringify(value));
     return this;
   }
 
   public JQLBuilder to(Object value) {
-    add(" TO " + stringify(value));
+    add(" TO " + StringUtils.stringify(value));
     return this;
   }
 
@@ -336,7 +337,7 @@ public class JQLBuilder {
 
   public JQLBuilder orderBy(OrderType orderType, Object... values) {
     verifyParams("ORDER BY", values);
-    add(" order by " + commaSeparatedList(values) + " " + orderType.toString().toLowerCase());
+    add(" order by " + StringUtils.commaSeparatedList(values) + " " + orderType.toString().toLowerCase());
     return this;
   }
 
@@ -354,49 +355,6 @@ public class JQLBuilder {
     return this;
   }
 
-  private String stringify(Object value) {
-    if (value instanceof Boolean) {
-      boolean b = (Boolean) value;
-      return (b) ? "true" : "false";
-    } else {
-      if (value instanceof Integer) {
-        return "" + (Integer) value;
-      } else if (value instanceof Double) {
-        return "" + (Double) value;
-      } else if (value instanceof Long) {
-        return "" + (Long) value;
-      } else if (value instanceof Float) {
-        return "" + (Float) value;
-      } else {
-        return (String) value;
-      }
-    }
-  }
-
-  private String commaSeparatedList(Object... values) {
-    String toAdd = "";
-    for (int i = 0; i < values.length; i++) {
-      if (i == values.length - 1) {
-        toAdd += stringify(values[i]);
-      } else {
-        toAdd += stringify(values[i]) + ",";
-      }
-    }
-    return toAdd;
-  }
-
-  private String wsSeparatedList(Object... values) {
-    String toAdd = "";
-    for (int i = 0; i < values.length; i++) {
-      if (i == values.length - 1) {
-        toAdd += stringify(values[i]);
-      } else {
-        toAdd += stringify(values[i]) + " ";
-      }
-    }
-    return toAdd;
-  }
-
   private void verifyParams(String keyword, Object... params) {
     if (params.length < 2) {
       throw new ParameterCountException("Keyword " + keyword + " needs at least 2 arguments");
@@ -409,14 +367,21 @@ public class JQLBuilder {
     }
   }
 
+  @Override
   public String build() {
     return sb.toString();
   }
 
+  @Override
   public String buildAndClear() {
     String tmp = sb.toString();
+    clear();
+    return tmp;
+  }
+
+  @Override
+  public void clear() {
     sb = null;
     sb = new StringBuilder();
-    return tmp;
   }
 }
