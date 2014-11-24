@@ -29,7 +29,8 @@ public class StringUtilsTest {
     assertThat(StringUtils.stringify(false), is("false"));
     assertThat(StringUtils.stringify(ExpandTypes.CHANGELOG), is("changelog"));
     assertThat(StringUtils.stringify(ExpandTypes.RENDEREDFIELDS), is("renderedfields"));
-    assertThat(StringUtils.stringify(ProtocolType.HTTP), is("http"));
+    assertThat(StringUtils.stringify(ProtocolType.HTTP.getName()), is("http"));
+    assertThat(StringUtils.stringify(ProtocolType.HTTP.getOrdinal()), is("1"));
   }
 
   @Test

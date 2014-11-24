@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * can build jql query for use with jira rest api
- * its capable to use standalone or in combinaten with {@link JiraUrlBuilder}
+ * its capable to use standalone or in combinaten with {@link CustomJiraUrlBuilder}
  * <p/>
  * NOTE: this builder only builds a jql query but not verifies that it can be used at all jira rest routes
  * so be careful when using it
@@ -112,9 +112,9 @@ import org.apache.logging.log4j.Logger;
  * @see com.github.lobedan.jira.api.builder.JQLStaticBuilder#desc() : OrderType.DESC
  *
  *
- * for more information about how to combine the {@link JiraUrlBuilder} with JQLBuilder
- * refer to the {@link JiraUrlBuilder class}
- * @see JiraUrlBuilder
+ * for more information about how to combine the {@link CustomJiraUrlBuilder} with JQLBuilder
+ * refer to the {@link CustomJiraUrlBuilder class}
+ * @see CustomJiraUrlBuilder
  * <p/>
  * following methods will return the last query as string or url object
  * @see #build() : {@link java.lang.String}
@@ -130,8 +130,9 @@ public class JQLBuilder implements Builder<String> {
   private static final Logger LOGGER = LogManager.getLogger(JQLBuilder.class);
 
   private StringBuilder sb;
+  private Builder parent;
 
-  public JQLBuilder() {
+  public JQLBuilder(Builder parent) {
     sb = new StringBuilder();
   }
 
@@ -152,7 +153,7 @@ public class JQLBuilder implements Builder<String> {
   }
 
   public JQLBuilder brackets(JQLBuilder aBuilder) {
-    return brackets(aBuilder.build());
+    return brackets(aBuilder.buildAndClear());
   }
 
   public JQLBuilder sep(String values) {
@@ -365,6 +366,18 @@ public class JQLBuilder implements Builder<String> {
     if (params.size() < 2) {
       throw new ParameterCountException("Keyword " + keyword + " needs at least 2 arguments");
     }
+  }
+
+  public Builder end() {
+    return parent;
+  }
+
+  public JQLFieldBuilder start() {
+    return new JQLFieldBuilder(this);
+  }
+
+  public StringBuilder sb() {
+    return sb;
   }
 
   @Override

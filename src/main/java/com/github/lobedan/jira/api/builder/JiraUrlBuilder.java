@@ -2,89 +2,80 @@ package com.github.lobedan.jira.api.builder;
 
 import java.net.URI;
 
-import com.github.lobedan.jira.api.types.ExpandTypes;
-import com.github.lobedan.jira.api.types.ProtocolType;
-import com.github.lobedan.jira.api.util.StringUtils;
+import com.github.lobedan.jira.api.domain.builder.JiraUrl;
+import com.github.lobedan.jira.api.types.SchemeType;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import gumi.builders.UrlBuilder;
-
 /**
- * builds a url to access your jira instance
- *
  * @author svenklemmer
- * @since 0.1.0
+ * @since jira-api-wrapper 0.1.0
  */
-public class JiraUrlBuilder implements Builder<URI> {
+public class JiraUrlBuilder implements Builder<URI>{
   private static final Logger LOGGER = LogManager.getLogger(JiraUrlBuilder.class);
 
-  private UrlBuilder builder;
+  private JiraUrl url;
 
-  public JiraUrlBuilder() {
-    builder = UrlBuilder.empty();
+  private JiraUrlBuilder() {
+    url = new JiraUrl();
   }
 
-  public JiraUrlBuilder protocol(String scheme) {
-    builder = builder.withScheme(scheme);
-    return this;
+  public static JiraUrlBuilder JiraUrl() {
+    return new JiraUrlBuilder();
   }
 
-  public JiraUrlBuilder protocol(ProtocolType scheme) {
-    builder = builder.withScheme(scheme.toString());
+  public JiraUrlBuilder scheme(SchemeType type) {
+    url.setScheme(type.getName());
     return this;
   }
 
   public JiraUrlBuilder host(String host) {
-    builder = builder.withHost(host);
-    return this;
-  }
-
-  public JiraUrlBuilder port(String port) {
-    builder =  builder.withPort(Integer.parseInt(port));
+    url.setHost(host);
     return this;
   }
 
   public JiraUrlBuilder port(int port) {
-    builder =  builder.withPort(port);
+    url.setPort(port);
     return this;
   }
 
-  public JiraUrlBuilder apiPath(String path) {
-    builder = builder.withPath(path);
+  public JiraUrlBuilder path(String path) {
+    url.setPath(path);
     return this;
   }
 
-  public JiraUrlBuilder jqlQuery(JQLBuilder jql) {
-    builder.addParameter("jql", jql.build());
+  public JiraUrlBuilder api(int version) {
+    url.setApi(version);
     return this;
   }
 
-  public JiraUrlBuilder expand(String... values) {
-    builder = builder.addParameter("expand", StringUtils.commaSeparatedList(values));
+  public JiraUrlBuilder api(String version) {
+    url.setApi(version);
     return this;
   }
 
-  public JiraUrlBuilder expand(ExpandTypes... values) {
-    builder = builder.addParameter("expand", StringUtils.commaSeparatedList(values));
-    return this;
+  public JQLBuilder jql() {
+    return new JQLBuilder(this);
   }
+
+
+
 
   @Override
   public URI build() {
-    return builder.toUri();
+    return url.toUri();
   }
 
   @Override
   public URI buildAndClear() {
-    URI uri = build();
+   JiraUrl tmp = url;
     clear();
-    return uri;
+    return tmp.toUri();
   }
 
   @Override
   public void clear() {
-    builder = UrlBuilder.empty();
+    url = new JiraUrl();
   }
 }

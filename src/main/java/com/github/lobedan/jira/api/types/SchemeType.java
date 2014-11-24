@@ -6,7 +6,7 @@ package com.github.lobedan.jira.api.types;
  * @author svenklemmer
  * @since jira-api-wrapper 0.1.0
  */
-public enum ProtocolType {
+public enum SchemeType {
   HTTP("http", 1),
   HTTPS("https", 2),
   FTP ("ftp", 4),
@@ -19,7 +19,7 @@ public enum ProtocolType {
   private String name;
   private int ordinal;
 
-  ProtocolType(String aName, int aOrdinal) {
+  SchemeType(String aName, int aOrdinal) {
     name = aName;
     ordinal = aOrdinal;
   }
@@ -28,16 +28,8 @@ public enum ProtocolType {
     return name;
   }
 
-  public void setName(String aName) {
-    name = aName;
-  }
-
   public int getOrdinal() {
     return ordinal;
-  }
-
-  public void setOrdinal(int aOrdinal) {
-    ordinal = aOrdinal;
   }
 
   @Override
