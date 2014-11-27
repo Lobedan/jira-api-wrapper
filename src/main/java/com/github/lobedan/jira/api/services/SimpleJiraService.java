@@ -2,7 +2,7 @@ package com.github.lobedan.jira.api.services;
 
 import java.net.URI;
 
-import com.github.lobedan.jira.api.builder.CustomJiraUrlBuilder;
+import com.github.lobedan.jira.api.builder.JiraUrlBuilder;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 public class SimpleJiraService implements JiraService, HttpRestTemplateAware {
   private static final Logger LOGGER = LogManager.getLogger(SimpleJiraService.class);
 
-  private CustomJiraUrlBuilder baseUrlBuilder;
+  private JiraUrlBuilder baseUrlBuilder;
   private URI baseUrl;
   private HttpRestTemplate httpRestTemplate;
 
@@ -52,7 +52,7 @@ public class SimpleJiraService implements JiraService, HttpRestTemplateAware {
   @Autowired
   @Qualifier(value = "jiraBaseUrl")
   @Override
-  public void setBaseUrl(CustomJiraUrlBuilder aUrlBuilder) {
+  public void setBaseUrl(JiraUrlBuilder aUrlBuilder) {
     this.baseUrlBuilder = aUrlBuilder;
     this.baseUrl = aUrlBuilder.build();
   }

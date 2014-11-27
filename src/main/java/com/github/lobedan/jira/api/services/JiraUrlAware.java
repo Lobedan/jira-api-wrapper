@@ -1,6 +1,6 @@
 package com.github.lobedan.jira.api.services;
 
-import com.github.lobedan.jira.api.builder.CustomJiraUrlBuilder;
+import com.github.lobedan.jira.api.builder.JiraUrlBuilder;
 
 /**
  * makes sure that a {@link com.github.lobedan.jira.api.services.JiraService}
@@ -20,5 +20,5 @@ import com.github.lobedan.jira.api.builder.CustomJiraUrlBuilder;
  * @since jira-api-wrapper 0.1.0
  */
 public interface JiraUrlAware {
-  void setBaseUrl(CustomJiraUrlBuilder aUrlBuilder);;
+  void setBaseUrl(JiraUrlBuilder aUrlBuilder);
 }

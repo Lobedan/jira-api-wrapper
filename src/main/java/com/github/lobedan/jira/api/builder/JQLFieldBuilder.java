@@ -1,5 +1,7 @@
 package com.github.lobedan.jira.api.builder;
 
+import com.github.lobedan.jira.api.domain.builder.JQLMetaHolder;
+
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -10,33 +12,40 @@ import org.apache.logging.log4j.LogManager;
 public class JQLFieldBuilder {
   private static final Logger LOGGER = LogManager.getLogger(JQLFieldBuilder.class);
 
-  private JQLBuilder parent;
+  private JiraUrlBuilder urlBuilder;
 
-  public JQLFieldBuilder(JQLBuilder aParent) {
-    parent = aParent;
+  public JQLFieldBuilder(JiraUrlBuilder jiraUrl) {
+    urlBuilder = jiraUrl;
   }
 
   public JQLOpsBuilder reporter() {
-    parent.sb().append("reporter");
-    return ops();
+    return add("reporter");
   }
 
   public JQLOpsBuilder assignee() {
-    parent.sb().append("assignee");
-    return ops();
+    return add("assignee");
   }
 
-  public JQLFieldBuilder or() {
-    parent.sb().append(" OR ");
-    return this;
+  public JQLOpsBuilder created() {
+    return add("created");
   }
 
-  public StringBuilder sb() {
-    return parent.sb();
+  public JQLOpsBuilder project() {
+    return add("project");
   }
 
-  private JQLOpsBuilder ops() {
-    return new JQLOpsBuilder(this);
+  public JQLOpsBuilder status() {
+    return add("status");
   }
 
+  public JQLOpsBuilder updated() {
+    return add("updated");
+  }
+
+
+
+  private JQLOpsBuilder add(String toAdd) {
+    JQLMetaHolder.getInstance().jql().add(toAdd);
+    return new JQLOpsBuilder(urlBuilder);
+  }
 }

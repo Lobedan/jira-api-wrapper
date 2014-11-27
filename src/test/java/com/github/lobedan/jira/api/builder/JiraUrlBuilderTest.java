@@ -21,29 +21,45 @@ public class JiraUrlBuilderTest {
   private static final Logger LOGGER = LogManager.getLogger(JiraUrlBuilderTest.class);
 
   @Test
-  public void testCanBuildJiraUrlDSL() throws Exception {
-    assertThat(JiraUrl()
-                   .scheme(SchemeType.HTTP)
-                   .host("example.com")
-                   .port(8080)
-                   .path("/jira")
-                   .api("latest")
-                   .jql()
-                   .start()
-                         .reporter()
-                             .is("markus")
-                             .or()
-                             .assignee()
-                             .is("salvatore")
-                     .and()
-                     .created()
-                      .was("2012-01-01")
-                   .end()
-                   .startAt(0)
-                   .maxResults(10)
-                   .total(50)
-        .build(),
-               is("http://example.com:8080/jira/rest/api/latest/?jql=(reporter = markus OR assignee = savaltore) AND created was 2012-01-01&startAt=0&maxResults=10&total=50"));
+  public void testCanConstructJiraUrlDSL() throws Exception {
+    assertThat(
+        JiraUrl()
+            .scheme(SchemeType.HTTP)
+            .host("example.com")
+            .port(8080)
+            .path("/jira")
+            .apiVersion(2)
+            .build()
+            .toString(), is("http://example.com:8080/jira/rest/api/2/"));
+
+    assertThat(
+        JiraUrl()
+            .scheme(SchemeType.HTTPS)
+            .host("example.com")
+            .path("")
+            .apiVersion("latest")
+            .build()
+            .toString(), is("https://example.com/rest/api/latest/"));
   }
 
+  @Test
+  public void testCanConstructJiraUrlWithJQLDSL() throws Exception {
+    assertThat(
+        JiraUrl()
+            .scheme(SchemeType.HTTP)
+            .host("example.com")
+            .port(8080)
+            .path("/jira")
+            .apiVersion("latest")
+            .jql()
+            .reporter().is("Markus")
+            .or()
+            .assignee().is("Sven")
+            .and()
+            .created().after("2012-02-13")
+            .end()
+            .build()
+            .toString(),
+        is("http://example.com:8080/jira/rest/api/latest/?jql=reporter+%3D+Markus+OR+assignee+%3D+Sven+AND+created+after+2012-02-13"));
+  }
 }
