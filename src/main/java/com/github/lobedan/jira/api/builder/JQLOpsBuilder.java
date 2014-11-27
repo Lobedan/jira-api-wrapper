@@ -3,6 +3,7 @@ package com.github.lobedan.jira.api.builder;
 import com.github.lobedan.jira.api.domain.builder.JQLMetaHolder;
 import com.github.lobedan.jira.api.types.ValueType;
 import com.github.lobedan.jira.api.util.StringUtils;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -63,12 +64,16 @@ public class JQLOpsBuilder {
         return add("was", value);
     }
 
-    public JQLBuilder after(Object value) {
-        return add("after", value);
+    public JQLBuilder wasNot(Object value) {
+        return add("was not", value);
     }
 
-    public JQLBuilder before(Object value) {
-        return add("before", value);
+    public JQLBuilder wasIn(Object... values) {
+        return addMultiple("was in", values);
+    }
+
+    public JQLBuilder wasNotIn(Object... values) {
+        return addMultiple("was not in", values);
     }
 
     public JQLBuilder in(Object... values) {
@@ -85,6 +90,10 @@ public class JQLOpsBuilder {
 
     public JQLBuilder doesNotContain(String value) {
         return add("!~", value);
+    }
+
+    public JQLBuilder changed() {
+        return add("CHANGED", null);
     }
 
     private JQLBuilder add(String key, Object value) {

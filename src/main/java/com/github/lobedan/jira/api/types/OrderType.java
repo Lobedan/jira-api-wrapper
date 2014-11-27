@@ -7,5 +7,5 @@ package com.github.lobedan.jira.api.types;
  * @since 0.1.0
  */
 public enum OrderType {
-    ASC, DESC
+  ASC, DESC
 }

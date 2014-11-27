@@ -1,12 +1,14 @@
 package com.github.lobedan.jira.api.builder;
 
+import java.net.URI;
+
 import com.github.lobedan.jira.api.domain.builder.JQLMetaHolder;
 import com.github.lobedan.jira.api.types.SchemeType;
-import gumi.builders.UrlBuilder;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.net.URI;
+import gumi.builders.UrlBuilder;
 
 /**
  * @author svenklemmer
@@ -76,7 +78,7 @@ public class JiraUrlBuilder {
             wasBuild = true;
         } else {
             clearAll();
-        }
+    }
         return latest;
     }
 

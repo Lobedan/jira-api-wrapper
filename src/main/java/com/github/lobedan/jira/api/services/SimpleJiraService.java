@@ -1,13 +1,14 @@
 package com.github.lobedan.jira.api.services;
 
+import java.net.URI;
+
 import com.github.lobedan.jira.api.builder.JiraUrlBuilder;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
-import java.net.URI;
 
 /**
  * implements methods from {@link com.github.lobedan.jira.api.services.JiraService} its the simplest implementation
@@ -22,44 +23,44 @@ import java.net.URI;
  */
 @Service
 public class SimpleJiraService implements JiraService, HttpRestTemplateAware {
-    private static final Logger LOGGER = LogManager.getLogger(SimpleJiraService.class);
+  private static final Logger LOGGER = LogManager.getLogger(SimpleJiraService.class);
 
-    private JiraUrlBuilder baseUrlBuilder;
-    private URI baseUrl;
-    private HttpRestTemplate httpRestTemplate;
+  private JiraUrlBuilder baseUrlBuilder;
+  private URI baseUrl;
+  private HttpRestTemplate httpRestTemplate;
 
-    @Override
-    public void searchJira() {
+  @Override
+  public void searchJira() {
 
-    }
+  }
 
-    @Override
-    public void createProject() {
+  @Override
+  public void createProject() {
 
-    }
+  }
 
-    @Override
-    public void changeProject() {
+  @Override
+  public void changeProject() {
 
-    }
+  }
 
-    @Override
-    public void deleteProject() {
+  @Override
+  public void deleteProject() {
 
-    }
+  }
 
-    @Autowired
-    @Qualifier(value = "jiraBaseUrl")
-    @Override
-    public void setBaseUrl(JiraUrlBuilder aUrlBuilder) {
-        this.baseUrlBuilder = aUrlBuilder;
-        this.baseUrl = aUrlBuilder.build();
-    }
+  @Autowired
+  @Qualifier(value = "jiraBaseUrl")
+  @Override
+  public void setBaseUrl(JiraUrlBuilder aUrlBuilder) {
+    this.baseUrlBuilder = aUrlBuilder;
+    this.baseUrl = aUrlBuilder.build();
+  }
 
-    @Autowired
-    @Qualifier(value = "defaultHttpRestTemplate")
-    @Override
-    public void setHttpRestTemplate(HttpRestTemplate aHttpRestTemplate) {
-        this.httpRestTemplate = aHttpRestTemplate;
-    }
+  @Autowired
+  @Qualifier(value = "defaultHttpRestTemplate")
+  @Override
+  public void setHttpRestTemplate(HttpRestTemplate aHttpRestTemplate) {
+    this.httpRestTemplate = aHttpRestTemplate;
+  }
 }

@@ -9,5 +9,5 @@ package com.github.lobedan.jira.api.services;
  * @since jira-api-wrapper 0.1.0
  */
 public interface HttpRestTemplateAware {
-    void setHttpRestTemplate(HttpRestTemplate aHttpRestTemplate);
+  void setHttpRestTemplate(HttpRestTemplate aHttpRestTemplate);
 }

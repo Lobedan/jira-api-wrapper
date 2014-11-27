@@ -1,11 +1,11 @@
 package com.github.lobedan.jira.api.domain;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * a simple date wrapper class which makes it more comfortable to work
@@ -17,26 +17,26 @@ import java.util.Date;
  * @since 0.1.0
  */
 public class JiraDate {
-    private static final Logger LOGGER = LogManager.getLogger(JiraDate.class);
-    private static final String JIRA_DATE_STRING = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"; //2009-05-11T09:45:12.000+0200
+  private static final Logger LOGGER = LogManager.getLogger(JiraDate.class);
+  private static final String JIRA_DATE_STRING = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"; //2009-05-11T09:45:12.000+0200
 
-    private SimpleDateFormat sdf = new SimpleDateFormat(JIRA_DATE_STRING);
+  private SimpleDateFormat sdf = new SimpleDateFormat(JIRA_DATE_STRING);
 
-    private Date date;
+  private Date date;
 
-    public Date getDate() {
-        return date;
-    }
+  public Date getDate() {
+    return date;
+  }
 
-    public void setDate(String aDate) throws ParseException {
-        date = sdf.parse(aDate);
-    }
+  public void setDate(String aDate) throws ParseException {
+    date = sdf.parse(aDate);
+  }
 
-    public String getDateAsString() {
-        return sdf.format(date);
-    }
+  public void setDate(Date aDate) {
+    this.date = aDate;
+  }
 
-    public void setDate(Date aDate) {
-        this.date = aDate;
-    }
+  public String getDateAsString() {
+    return sdf.format(date);
+  }
 }

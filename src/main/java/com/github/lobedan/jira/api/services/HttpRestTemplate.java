@@ -16,19 +16,19 @@ import org.springframework.web.client.RestTemplate;
  * @since jira-api-wrapper 0.1.0
  */
 public class HttpRestTemplate extends RestTemplate {
-    private static final Logger LOGGER = LogManager.getLogger(HttpRestTemplate.class);
+  private static final Logger LOGGER = LogManager.getLogger(HttpRestTemplate.class);
 
-    private Credentials credentials;
+  private Credentials credentials;
 
-    public HttpRestTemplate(UsernamePasswordCredentials aCredentials) {
-        setCredentials(aCredentials);
-    }
+  public HttpRestTemplate(UsernamePasswordCredentials aCredentials) {
+    setCredentials(aCredentials);
+  }
 
-    public Credentials getCredentials() {
-        return credentials;
-    }
+  public Credentials getCredentials() {
+    return credentials;
+  }
 
-    public void setCredentials(Credentials aCredentials) {
-        credentials = aCredentials;
-    }
+  public void setCredentials(Credentials aCredentials) {
+    credentials = aCredentials;
+  }
 }

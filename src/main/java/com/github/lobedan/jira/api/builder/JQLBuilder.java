@@ -1,6 +1,9 @@
 package com.github.lobedan.jira.api.builder;
 
 import com.github.lobedan.jira.api.domain.builder.JQLMetaHolder;
+import com.github.lobedan.jira.api.types.OrderType;
+import com.github.lobedan.jira.api.util.StringUtils;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,9 +30,45 @@ public class JQLBuilder {
         return new JQLFieldBuilder(parent);
     }
 
-    public JQLOpsBuilder by(String username) {
+    public JQLBuilder by(String username) {
         JQLMetaHolder.getInstance().jql().add(" BY " + username);
-        return new JQLOpsBuilder(parent);
+        return this;
+    }
+
+    public JQLBuilder from(Object value) {
+        JQLMetaHolder.getInstance().jql().add(" FROM " + StringUtils.stringify(value));
+        return this;
+    }
+
+    public JQLBuilder to(Object value) {
+        JQLMetaHolder.getInstance().jql().add(" TO " + StringUtils.stringify(value));
+        return this;
+    }
+
+    public JQLBuilder after(Object value) {
+        JQLMetaHolder.getInstance().jql().add(" AFTER " + StringUtils.stringify(value));
+        return this;
+    }
+
+    public JQLBuilder before(Object value) {
+        JQLMetaHolder.getInstance().jql().add(" BEFORE " + StringUtils.stringify(value));
+        return this;
+    }
+
+    public JQLBuilder on(Object value) {
+        JQLMetaHolder.getInstance().jql().add(" ON " + StringUtils.stringify(value));
+        return this;
+    }
+
+    public JQLBuilder during(Object value1, Object value2) {
+        JQLMetaHolder.getInstance().jql()
+            .add(" DURING (" + StringUtils.stringify(value1) + ", " + StringUtils.stringify(value2) + ")");
+        return this;
+    }
+
+    public JQLBuilder orderBy(OrderType orderType, Object... values) {
+        JQLMetaHolder.getInstance().jql().add(" order by " + StringUtils.commaSeparatedList(values) + " " + orderType);
+        return this;
     }
 
     public JiraUrlBuilder end() {

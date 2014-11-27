@@ -10,12 +10,11 @@ package com.github.lobedan.jira.api.services;
  */
 public interface JiraService extends JiraUrlAware {
 
-    void searchJira();
+  void searchJira();
 
-    void createProject();
+  void createProject();
 
-    void changeProject();
+  void changeProject();
 
-    void deleteProject();
-
+  void deleteProject();
 }
