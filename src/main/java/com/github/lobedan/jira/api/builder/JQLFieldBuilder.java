@@ -1,9 +1,8 @@
 package com.github.lobedan.jira.api.builder;
 
 import com.github.lobedan.jira.api.domain.builder.JQLMetaHolder;
-
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * @author svenklemmer

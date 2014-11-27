@@ -1,5 +1,3 @@
-
-
 {
   "expand": "schema,names",
   "startAt": 0,
@@ -1979,7 +1977,6 @@
       "fields": {
         "summary": "Community - Rosenheim24",
         "customfield_10364": null,
-
         "progress": {
           "progress": 0,
           "total": 0

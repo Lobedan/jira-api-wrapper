@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Information about the author of a task
- *
+ * <p/>
  * avatarUrls are missing because they are not a really usefull informationen
  * they are maybe used only in uis where its needed to show them (e.g. virtual boards)
  *

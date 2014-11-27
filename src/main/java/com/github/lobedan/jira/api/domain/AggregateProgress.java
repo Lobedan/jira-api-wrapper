@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 /**
  * progress which the task should have at this moment
  * normaly it should be the same like {@link com.github.lobedan.jira.api.domain.Progress}
- *
+ * <p/>
  * TODO: but because the object has the same type its maybe better to combine them in one single object
  *
  * @author Sven Klemmer
@@ -25,7 +25,8 @@ public class AggregateProgress {
     @JsonProperty(value = "percent")
     private double percent;
 
-    public AggregateProgress() { }
+    public AggregateProgress() {
+    }
 
     public long getProgress() {
 

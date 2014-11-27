@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Object representing the root from json string received at /api/latest/search
- *
+ * <p/>
  * the most values are included in {@link com.github.lobedan.jira.api.domain.Issue object}
  *
  * @author Sven Klemmer

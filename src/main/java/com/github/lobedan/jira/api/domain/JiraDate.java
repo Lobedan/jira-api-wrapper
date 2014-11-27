@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * a simple date wrapper class which makes it more comfortable to work
  * with the dateformat jira provides
- *
+ * <p/>
  * inside it will still work with {@link java.util.Date}
  *
  * @author Sven Klemmer
@@ -28,15 +28,15 @@ public class JiraDate {
         return date;
     }
 
+    public void setDate(String aDate) throws ParseException {
+        date = sdf.parse(aDate);
+    }
+
     public String getDateAsString() {
         return sdf.format(date);
     }
 
     public void setDate(Date aDate) {
         this.date = aDate;
-    }
-
-    public void setDate(String aDate) throws ParseException {
-            date = sdf.parse(aDate);
     }
 }

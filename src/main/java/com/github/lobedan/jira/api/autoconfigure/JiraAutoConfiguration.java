@@ -3,7 +3,6 @@ package com.github.lobedan.jira.api.autoconfigure;
 import com.github.lobedan.jira.api.builder.JiraUrlBuilder;
 import com.github.lobedan.jira.api.services.HttpRestTemplate;
 import com.github.lobedan.jira.api.types.SchemeType;
-
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -26,35 +25,35 @@ import static com.github.lobedan.jira.api.builder.JiraUrlBuilder.JiraUrl;
 @EnableConfigurationProperties(JiraProperties.class)
 public class JiraAutoConfiguration {
 
-  @Autowired
-  private JiraProperties properties;
+    @Autowired
+    private JiraProperties properties;
 
-  @Bean(name = "jiraBaseUrl")
-  public JiraUrlBuilder jiraUrl() {
+    @Bean(name = "jiraBaseUrl")
+    public JiraUrlBuilder jiraUrl() {
 
-    String protocol;
-    if (properties.getHost().contains("https://")) {
-      properties.setHost(properties.getHost().replace("https://", ""));
-      protocol = "https://";
-    } else {
-      properties.setHost(properties.getHost().replace("http://", ""));
-      protocol = "http://";
+        String protocol;
+        if (properties.getHost().contains("https://")) {
+            properties.setHost(properties.getHost().replace("https://", ""));
+            protocol = "https://";
+        } else {
+            properties.setHost(properties.getHost().replace("http://", ""));
+            protocol = "http://";
+        }
+
+        return JiraUrl()
+                .scheme(SchemeType.HTTP)
+                .host(properties.getHost())
+                .port(properties.getPort())
+                .path(properties.getApiPath());
     }
 
-    return JiraUrl()
-        .scheme(SchemeType.HTTP)
-        .host(properties.getHost())
-        .port(properties.getPort())
-        .path(properties.getApiPath());
-  }
+    @Bean(name = "jiraCredentials")
+    public UsernamePasswordCredentials credentials() {
+        return new UsernamePasswordCredentials(properties.getApiUser(), properties.getApiPwd());
+    }
 
-  @Bean(name = "jiraCredentials")
-  public UsernamePasswordCredentials credentials() {
-    return new UsernamePasswordCredentials(properties.getApiUser(), properties.getApiPwd());
-  }
-
-  @Bean(name = "defaultHttpRestTemplate")
-  public HttpRestTemplate httpRestTemplate() {
-    return new HttpRestTemplate(new UsernamePasswordCredentials(properties.getApiUser(), properties.getApiPwd()));
-  }
+    @Bean(name = "defaultHttpRestTemplate")
+    public HttpRestTemplate httpRestTemplate() {
+        return new HttpRestTemplate(new UsernamePasswordCredentials(properties.getApiUser(), properties.getApiPwd()));
+    }
 }

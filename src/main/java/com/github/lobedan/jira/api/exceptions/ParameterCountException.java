@@ -7,26 +7,26 @@ package com.github.lobedan.jira.api.exceptions;
  * @since 0.1.0
  */
 public class ParameterCountException extends RuntimeException {
-  public ParameterCountException() {
-    super();
-  }
+    public ParameterCountException() {
+        super();
+    }
 
-  public ParameterCountException(String message) {
-    super(message);
-  }
+    public ParameterCountException(String message) {
+        super(message);
+    }
 
-  public ParameterCountException(String message, Throwable cause) {
-    super(message, cause);
-  }
+    public ParameterCountException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
-  public ParameterCountException(Throwable cause) {
-    super(cause);
-  }
+    public ParameterCountException(Throwable cause) {
+        super(cause);
+    }
 
-  protected ParameterCountException(String message,
-                                    Throwable cause,
-                                    boolean enableSuppression,
-                                    boolean writableStackTrace) {
-    super(message, cause, enableSuppression, writableStackTrace);
-  }
+    protected ParameterCountException(String message,
+                                      Throwable cause,
+                                      boolean enableSuppression,
+                                      boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
 }

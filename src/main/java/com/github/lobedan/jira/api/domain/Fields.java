@@ -11,17 +11,17 @@ import java.util.Arrays;
  * in a jira task
  * <p/>
  * it also leads to other objects
+ *
+ * @author Sven Klemmer
  * @see com.github.lobedan.jira.api.domain.Type
  * @see com.github.lobedan.jira.api.domain.Progress
  * @see com.github.lobedan.jira.api.domain.Resolution
  * @see java.util.Date
  * @see com.github.lobedan.jira.api.domain.Reporter
- *
+ * <p/>
  * TODO: Custom fields will be supported in a feature release
  * TODO: maybe we will make a big object for all fields and dont split it up into small ones
  * because there are some information that are not really nessessary like url
- *
- * @author Sven Klemmer
  * @since 0.1.0
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -151,7 +151,7 @@ public class Fields {
         this.resolution = resolution;
     }
 
-       public long getTimespent() {
+    public long getTimespent() {
         return timespent;
     }
 
@@ -175,7 +175,7 @@ public class Fields {
         this.aggregateTime = aggregateTime;
     }
 
-       public String getPriority() {
+    public String getPriority() {
         return priority;
     }
 

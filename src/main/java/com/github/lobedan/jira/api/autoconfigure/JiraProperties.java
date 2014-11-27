@@ -12,65 +12,65 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "jira")
 public class JiraProperties {
 
-  private String host;
-  private String port;
-  private String apiPath;
+    private String host;
+    private String port;
+    private String apiPath;
 
-  private String apiUser;
-  private String apiPwd;
+    private String apiUser;
+    private String apiPwd;
 
-  public JiraProperties() {
-  }
+    public JiraProperties() {
+    }
 
-  public String getHost() {
+    public String getHost() {
 
-    return host;
-  }
+        return host;
+    }
 
-  public void setHost(String aHost) {
-    host = aHost;
-  }
+    public void setHost(String aHost) {
+        host = aHost;
+    }
 
-  public String getPort() {
-    return port;
-  }
+    public String getPort() {
+        return port;
+    }
 
-  public void setPort(String aPort) {
-    port = aPort;
-  }
+    public void setPort(String aPort) {
+        port = aPort;
+    }
 
-  public String getApiPath() {
-    return apiPath;
-  }
+    public String getApiPath() {
+        return apiPath;
+    }
 
-  public void setApiPath(String aApiPath) {
-    apiPath = aApiPath;
-  }
+    public void setApiPath(String aApiPath) {
+        apiPath = aApiPath;
+    }
 
-  public String getApiUser() {
-    return apiUser;
-  }
+    public String getApiUser() {
+        return apiUser;
+    }
 
-  public void setApiUser(String aApiUser) {
-    apiUser = aApiUser;
-  }
+    public void setApiUser(String aApiUser) {
+        apiUser = aApiUser;
+    }
 
-  public String getApiPwd() {
-    return apiPwd;
-  }
+    public String getApiPwd() {
+        return apiPwd;
+    }
 
-  public void setApiPwd(String aApiPwd) {
-    apiPwd = aApiPwd;
-  }
+    public void setApiPwd(String aApiPwd) {
+        apiPwd = aApiPwd;
+    }
 
-  @Override
-  public String toString() {
-    return new ToStringBuilder(this)
-        .append("host", host)
-        .append("port", port)
-        .append("apiPath", apiPath)
-        .append("apiUser", apiUser)
-        .append("apiPwd", apiPwd)
-        .toString();
-  }
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("host", host)
+                .append("port", port)
+                .append("apiPath", apiPath)
+                .append("apiUser", apiUser)
+                .append("apiPwd", apiPwd)
+                .toString();
+    }
 }

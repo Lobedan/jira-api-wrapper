@@ -8,24 +8,24 @@ import org.apache.logging.log4j.Logger;
  * @since jira-api-wrapper 0.1.0
  */
 public class JQL {
-  private static final Logger LOGGER = LogManager.getLogger(JQL.class);
+    private static final Logger LOGGER = LogManager.getLogger(JQL.class);
 
-  private StringBuilder sb;
+    private StringBuilder sb;
 
-  public JQL() {
-    clear();
-  }
+    public JQL() {
+        clear();
+    }
 
-  public StringBuilder sb() {
-    return sb;
-  }
+    public StringBuilder sb() {
+        return sb;
+    }
 
-  public void add(String string) {
-    LOGGER.info("added string \"" + string + "\" to stringbuilder");
-    sb.append(string);
-  }
+    public void add(String string) {
+        LOGGER.info("added string \"" + string + "\" to stringbuilder");
+        sb.append(string);
+    }
 
-  public void clear() {
-    sb = new StringBuilder();
-  }
+    public void clear() {
+        sb = new StringBuilder();
+    }
 }

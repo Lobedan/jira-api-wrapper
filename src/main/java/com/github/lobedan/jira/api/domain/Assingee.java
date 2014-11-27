@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Information about the person who is asigned to that task
- *
+ * <p/>
  * TODO: maybe it will be combined with {@link com.github.lobedan.jira.api.domain.Reporter} in a future release
  * because they both represents persons and hold the same information
  *
