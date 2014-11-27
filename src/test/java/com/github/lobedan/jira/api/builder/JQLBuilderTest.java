@@ -33,16 +33,17 @@ public class JQLBuilderTest {
                    .jql()
                    .project().in("JRA, CONF")
                    .and()
-                   .status().is("open")
+                   .status().equal("open")
                    .or()
-                   .status().is("closed")
+                   .status().equal("closed")
                    .and()
-                   .assignee().isNot("jsmith")
+                   .assignee().notEqual("jsmith")
                    .end()
                    .build()
                    .toString(),
-               is("http://example.com/rest/api/latest/"
-                  + "?jql=project+in+%28JRA%2C+CONF%29+AND+status+%3D+open+OR+status+%3D+closed+AND+assignee+%21%3D+jsmith"));
+               is("http://example.com/rest/api/latest/?jql=project%20%28JRA%2C%20CONF%29%20AND%20status%20%3D%20open%20OR" +
+                       "%20status%20%3D%20closed%20AND%20assignee%20%21%3D%20jsmith")
+    );
 
     //test fields reporter, assignee, created, updated, project, status
     //include test operations is, isNot, after, before, in, was, by
@@ -52,22 +53,25 @@ public class JQLBuilderTest {
                    .path("")
                    .apiVersion("latest")
                    .jql()
-                   .reporter().is("person")
-                   .and()
-                   .assignee().isNot("hans")
-                   .and()
-                   .created().after("2012-02-02")
-                   .or()
-                   .updated().before("2012-02-15")
-                   .and()
-                   .project().in("DIH", "JRA")
-                   .and()
-                   .status().was("Resolved").by("jsmith").before("2011-02-02")
+                        .reporter().equal("person")
+                    .and()
+                        .assignee().notEqual("hans")
+                    .and()
+                        .created().after("2012-02-02")
+                    .or()
+                        .updated().before("2012-02-15")
+                    .and()
+                        .project().in("DIH", "JRA")
+                    .and()
+                        .status().was("Resolved").by("jsmith").before("2011-02-02")
                    .end()
                    .build()
                    .toString(),
                is("http://example.com/rest/api/latest/"
-                  + "?jql=reporter is person and assigne is not hans and created after 2012-02-02 OR updated before 2012-02-15"
-                  + "AND project in (DIH,JRA) and status was Resolved BY jsmith before 2011-02-02"));
+                  + "?jql=reporter%20%3D%20person%20AND%20assignee%20%21%3D%20hans%20AND%20created%20after%202012-02-02%20OR" +
+                       "%20updated%20before%202012-02-15%20AND%20project%20%28DIH%2CJRA%29%20AND%20status%20was%20Resolved%20" +
+                       "BY%20jsmith%20before%202011-02-02")
+
+    );
   }
 }

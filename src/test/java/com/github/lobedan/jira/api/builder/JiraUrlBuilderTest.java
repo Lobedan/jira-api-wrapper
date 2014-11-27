@@ -52,14 +52,15 @@ public class JiraUrlBuilderTest {
             .path("/jira")
             .apiVersion("latest")
             .jql()
-            .reporter().is("Markus")
+            .reporter().equal("Markus")
             .or()
-            .assignee().is("Sven")
+            .assignee().equal("Sven")
             .and()
             .created().after("2012-02-13")
             .end()
             .build()
             .toString(),
-        is("http://example.com:8080/jira/rest/api/latest/?jql=reporter+%3D+Markus+OR+assignee+%3D+Sven+AND+created+after+2012-02-13"));
+        is("http://example.com:8080/jira/rest/api/latest/?jql=" +
+                "reporter%20%3D%20Markus%20OR%20assignee%20%3D%20Sven%20AND%20created%20after%202012-02-13"));
   }
 }

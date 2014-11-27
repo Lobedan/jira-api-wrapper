@@ -5,10 +5,13 @@ import java.net.URI;
 import com.github.lobedan.jira.api.domain.builder.JQLMetaHolder;
 import com.github.lobedan.jira.api.types.SchemeType;
 
+import jdk.nashorn.internal.runtime.URIUtils;
+import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
 import gumi.builders.UrlBuilder;
+import org.springframework.web.util.UriUtils;
 
 /**
  * @author svenklemmer
@@ -26,6 +29,7 @@ public class JiraUrlBuilder {
   }
 
   private JiraUrlBuilder() {
+    JQLMetaHolder.getInstance().jql().clear();
     urlBuilder = UrlBuilder.empty();
   }
 
