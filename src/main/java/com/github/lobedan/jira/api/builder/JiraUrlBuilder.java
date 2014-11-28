@@ -72,6 +72,10 @@ public class JiraUrlBuilder {
         urlBuilder = urlBuilder.addParameter("jql", jqlString);
     }
 
+    public String getJQL() {
+        return JQLMetaHolder.getInstance().jql().sb().toString();
+    }
+
     public URI build() {
         if (!wasBuild) {
             latest = urlBuilder.toUri();

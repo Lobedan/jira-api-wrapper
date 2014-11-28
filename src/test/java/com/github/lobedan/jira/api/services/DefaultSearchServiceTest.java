@@ -10,11 +10,9 @@ package com.github.lobedan.jira.api.services;
 
 import java.net.URISyntaxException;
 
-import com.github.lobedan.jira.api.domain.Issue;
+import com.github.lobedan.jira.api.domain.Search;
 import com.github.lobedan.jira.api.types.SchemeType;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,36 +29,39 @@ import static org.mockito.Mockito.spy;
 
 @ContextConfiguration(locations = "classpath:test-app-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
-public class DefaultIssueServiceTest {
-
-  private static final Logger LOGGER = LogManager.getLogger(DefaultIssueServiceTest.class);
-
+public class DefaultSearchServiceTest {
   @Autowired
-  private DefaultIssueService service;
-  private DefaultIssueService spy;
+  private DefaultSearchService service;
+  private DefaultSearchService spy;
 
   @Before
   public void setup() throws URISyntaxException {
-    spy = spy(service);
-    spy.setBaseUrlBuilder(
+    service.setBaseUrlBuilder(
         JiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
             .apiVersion("latest")
+            .jql()
+            .assignee().equal("hans")
+            .and()
+            .status().notEqual("Closed")
+            .end()
     );
+    spy = spy(service);
   }
 
   @Test
   public void testCanGetIssueByKey() throws Exception {
-    assertThat(spy.getBaseUrlBuilder().build().toString(), is("http://example.com/rest/api/latest/"));
+    assertThat(spy.getBaseUrlBuilder().build().toString(),
+               is("http://example.com/rest/api/latest/?jql=assignee%20%3D%20"
+                  + "hans%20AND%20status%20%21%3D%20Closed"));
 
-    Issue testObject = new Issue();
-    testObject.setKey("TEST-1234");
-    doReturn(testObject).when(spy).getIssue("TEST-1234");
+    Search testObject = new Search();
+    testObject.setTotal(1);
+    doReturn(testObject).when(spy).searchForIssues(service.getBaseUrlBuilder());
 
     assertThat(testObject, is(notNullValue()));
-    assertThat(testObject.getKey(), is("TEST-1234"));
+    assertThat(testObject.getTotal(), is(1));
   }
-
 }

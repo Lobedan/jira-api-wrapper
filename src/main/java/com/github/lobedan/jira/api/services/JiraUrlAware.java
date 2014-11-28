@@ -19,4 +19,5 @@ import com.github.lobedan.jira.api.builder.JiraUrlBuilder;
  */
 public interface JiraUrlAware {
   void setBaseUrlBuilder(JiraUrlBuilder aUrlBuilder);
+  JiraUrlBuilder getBaseUrlBuilder();
 }

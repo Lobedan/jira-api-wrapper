@@ -8,7 +8,6 @@
  */
 package com.github.lobedan.jira.api.services;
 
-import com.github.lobedan.jira.api.builder.JiraUrlBuilder;
 import com.github.lobedan.jira.api.domain.Issue;
 
 /**
@@ -34,10 +33,4 @@ public interface IssueService extends JiraService {
    * @return issue object of json response
    */
   Issue getIssue(String key);
-
-  /**
-   * actual available jiraUrlBuilder instance
-   */
-  JiraUrlBuilder getJiraUrlBuilder();
-
 }

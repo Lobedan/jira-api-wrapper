@@ -9,8 +9,8 @@
 package com.github.lobedan.jira.api.services;
 
 import com.github.lobedan.jira.api.builder.JiraUrlBuilder;
-import com.github.lobedan.jira.api.domain.Issue;
-import com.github.lobedan.jira.api.exceptions.IssueNotFoundException;
+import com.github.lobedan.jira.api.domain.Search;
+import com.github.lobedan.jira.api.exceptions.NoIssuesFoundException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,37 +19,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
-/**
- * Basic CRUD service to work with issues
- *
- * @author Sven Klemmer
- * @since 0.1.0
- */
 @Service
-public class DefaultIssueService implements IssueService, HttpRestTemplateAware {
-  private static final Logger LOGGER = LogManager.getLogger(DefaultIssueService.class);
+public class DefaultSearchService implements SearchService, HttpRestTemplateAware {
+  private static final Logger LOGGER = LogManager.getLogger(DefaultSearchService.class);
 
   private JiraUrlBuilder baseUrlBuilder;
   private HttpRestTemplate restTemplate;
-
-  @Override
-  public Issue getIssue(long id) {
-    return getIssue(String.valueOf(id));
-  }
-
-  @Override
-  public Issue getIssue(String key) {
-    Assert.notNull(baseUrlBuilder.build());
-    ResponseEntity<Issue> response = restTemplate.exchange(baseUrlBuilder.build().toString() + "/issue/" + key,
-                                                           HttpMethod.GET, Issue.class);
-    if (response.getBody() != null) {
-      return response.getBody();
-    } else {
-      throw new IssueNotFoundException("Could not find Issue with key or ID " + key);
-    }
-  }
 
   @Override
   @Autowired
@@ -68,5 +44,15 @@ public class DefaultIssueService implements IssueService, HttpRestTemplateAware 
   @Qualifier("defaultHttpRestTemplate")
   public void setHttpRestTemplate(HttpRestTemplate aHttpRestTemplate) {
     this.restTemplate = aHttpRestTemplate;
+  }
+
+  @Override
+  public Search searchForIssues(JiraUrlBuilder builder) {
+    ResponseEntity<Search> response = restTemplate.exchange(baseUrlBuilder.build().toString(), HttpMethod.GET, Search.class);
+    if (response != null) {
+      return response.getBody();
+    } else {
+      throw new NoIssuesFoundException("Could no find any issues");
+    }
   }
 }
