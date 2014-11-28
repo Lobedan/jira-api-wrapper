@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,6 +18,7 @@ import org.apache.logging.log4j.Logger;
  * @author Sven Klemmer
  * @since 0.1.0
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class JiraDate {
   private static final Logger LOGGER = LogManager.getLogger(JiraDate.class);
   private static final String JIRA_DATE_STRING = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"; //2009-05-11T09:45:12.000+0200
@@ -23,6 +26,12 @@ public class JiraDate {
   private SimpleDateFormat sdf = new SimpleDateFormat(JIRA_DATE_STRING);
 
   private Date date;
+
+  public JiraDate() { }
+
+  public JiraDate(String aDate) throws ParseException {
+    setDate(aDate);
+  }
 
   public Date getDate() {
     return date;
@@ -32,7 +41,7 @@ public class JiraDate {
     date = sdf.parse(aDate);
   }
 
-  public void setDate(Date aDate) {
+  public void setJavaDate(Date aDate) {
     this.date = aDate;
   }
 

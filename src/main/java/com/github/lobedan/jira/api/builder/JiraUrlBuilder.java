@@ -51,7 +51,7 @@ public class JiraUrlBuilder {
     }
 
     public JiraUrlBuilder path(String path) {
-        urlBuilder = urlBuilder.withPath(path);
+        urlBuilder = urlBuilder.withPath((path.isEmpty() || path.contains("/")) ? path : "/" + path);
         return this;
     }
 

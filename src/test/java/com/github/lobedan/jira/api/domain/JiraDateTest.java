@@ -16,7 +16,7 @@ public class JiraDateTest {
   private JiraDate date;
 
   @Before
-  public void setup() {
+  public void setup() throws ParseException  {
     date = new JiraDate();
   }
 

@@ -16,6 +16,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -41,7 +42,8 @@ public class DefaultIssueService implements IssueService, HttpRestTemplateAware 
   @Override
   public Issue getIssue(String key) {
     Assert.notNull(baseUrlBuilder.build());
-    ResponseEntity<Issue> response = restTemplate.getForEntity(baseUrlBuilder.build().toString() + "/issue/" + key, Issue.class);
+    ResponseEntity<Issue> response = restTemplate.exchange(baseUrlBuilder.build().toString() + "/issue/" + key,
+                                                           HttpMethod.GET, Issue.class);
     if (response.getBody() != null) {
       return response.getBody();
     } else {
@@ -65,6 +67,6 @@ public class DefaultIssueService implements IssueService, HttpRestTemplateAware 
   @Autowired
   @Qualifier("defaultHttpRestTemplate")
   public void setHttpRestTemplate(HttpRestTemplate aHttpRestTemplate) {
-     this.restTemplate = aHttpRestTemplate;
+    this.restTemplate = aHttpRestTemplate;
   }
 }

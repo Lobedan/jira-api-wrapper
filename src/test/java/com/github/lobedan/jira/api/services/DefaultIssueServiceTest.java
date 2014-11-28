@@ -13,6 +13,8 @@ import java.net.URISyntaxException;
 import com.github.lobedan.jira.api.domain.Issue;
 import com.github.lobedan.jira.api.types.SchemeType;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +32,8 @@ import static org.mockito.Mockito.spy;
 @ContextConfiguration(locations = "classpath:test-app-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class DefaultIssueServiceTest {
+
+  private static final Logger LOGGER = LogManager.getLogger(DefaultIssueServiceTest.class);
 
   @Autowired
   private DefaultIssueService service;
@@ -53,8 +57,6 @@ public class DefaultIssueServiceTest {
 
     Issue testObject = new Issue();
     testObject.setKey("TEST-1234");
-
-
     doReturn(testObject).when(spy).getIssue("TEST-1234");
 
     assertThat(testObject, is(notNullValue()));
