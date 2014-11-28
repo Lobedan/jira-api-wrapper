@@ -12,9 +12,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "jira")
 public class JiraProperties {
 
+  private String scheme;
   private String host;
   private String port;
   private String apiPath;
+  private String apiVersion;
 
   private String apiUser;
   private String apiPwd;
@@ -22,8 +24,23 @@ public class JiraProperties {
   public JiraProperties() {
   }
 
-  public String getHost() {
+  public String getScheme() {
+    return scheme;
+  }
 
+  public void setScheme(String aScheme) {
+    scheme = aScheme;
+  }
+
+  public String getApiVersion() {
+    return apiVersion;
+  }
+
+  public void setApiVersion(String aApiVersion) {
+    apiVersion = aApiVersion;
+  }
+
+  public String getHost() {
     return host;
   }
 
@@ -66,9 +83,11 @@ public class JiraProperties {
   @Override
   public String toString() {
     return new ToStringBuilder(this)
+        .append("scheme", scheme)
         .append("host", host)
         .append("port", port)
         .append("apiPath", apiPath)
+        .append("apiVersion", apiVersion)
         .append("apiUser", apiUser)
         .append("apiPwd", apiPwd)
         .toString();

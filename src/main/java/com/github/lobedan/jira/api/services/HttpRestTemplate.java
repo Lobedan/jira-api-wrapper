@@ -18,8 +18,9 @@ import org.springframework.web.client.RestTemplate;
 public class HttpRestTemplate extends RestTemplate {
   private static final Logger LOGGER = LogManager.getLogger(HttpRestTemplate.class);
 
-  private Credentials credentials;
+  private UsernamePasswordCredentials credentials;
 
+  public HttpRestTemplate() { super(); }
   public HttpRestTemplate(UsernamePasswordCredentials aCredentials) {
     setCredentials(aCredentials);
   }
@@ -28,7 +29,7 @@ public class HttpRestTemplate extends RestTemplate {
     return credentials;
   }
 
-  public void setCredentials(Credentials aCredentials) {
+  public void setCredentials(UsernamePasswordCredentials aCredentials) {
     credentials = aCredentials;
   }
 }

@@ -32,20 +32,19 @@ public class JiraAutoConfiguration {
   @Bean(name = "jiraBaseUrl")
   public JiraUrlBuilder jiraUrl() {
 
-    String protocol;
-    if (properties.getHost().contains("https://")) {
-      properties.setHost(properties.getHost().replace("https://", ""));
-      protocol = "https://";
+   SchemeType schemeType;
+    if (properties.getScheme().contains("https://")) {
+      schemeType = SchemeType.HTTPS;
     } else {
-      properties.setHost(properties.getHost().replace("http://", ""));
-      protocol = "http://";
+      schemeType = SchemeType.HTTP;
     }
 
     return JiraUrl()
-        .scheme(SchemeType.HTTP)
+        .scheme(schemeType)
         .host(properties.getHost())
         .port(properties.getPort())
-        .path(properties.getApiPath());
+        .path(properties.getApiPath())
+        .apiVersion(properties.getApiVersion());
   }
 
   @Bean(name = "jiraCredentials")

@@ -18,4 +18,5 @@
     earliestUnreleasedVersion(
 
 ** *Support Field aliases* see https://confluence.atlassian.com/display/JIRA/Advanced+Searching#AdvancedSearching-Filter
-** *Support concrete dates*
+** *Support concrete date values*
+** *CRUD operations for issues (GET Done)
