@@ -30,7 +30,6 @@ public class AggregateProgress {
   }
 
   public long getProgress() {
-
     return progress;
   }
 

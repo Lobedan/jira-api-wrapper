@@ -8,6 +8,6 @@ package com.github.lobedan.jira.api.types;
  * @author svenklemmer
  * @since jira-api-wrapper 0.1.0
  */
-public enum ExpandTypes {
+public enum ExpandType {
   EDITMETA, RENDEREDFIELDS, TRANSITIONS, CHANGELOG, OPERATIONS
 }

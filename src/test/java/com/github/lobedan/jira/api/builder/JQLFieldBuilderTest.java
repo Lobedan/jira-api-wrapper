@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import static com.github.lobedan.jira.api.builder.JiraUrlBuilder.JiraUrl;
+import static com.github.lobedan.jira.api.builder.JiraUrlBuilder.jiraUrl;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -23,7 +23,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testAffectedVersionField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -44,7 +44,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testAssigneeField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -62,7 +62,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testAttachmentsField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -80,7 +80,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testCategoryField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -96,7 +96,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testCommentField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -115,7 +115,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testComponentField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -143,7 +143,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testCreatedField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -166,7 +166,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testCreatorField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -182,7 +182,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testCustomFieldField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -198,7 +198,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testDescriptionField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -216,7 +216,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testDueDateField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -241,7 +241,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testEnvironmentField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -257,7 +257,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testEpicLinkField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -273,7 +273,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testFilterField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -289,7 +289,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testFixVersionField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -307,7 +307,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testIssueKeyField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -325,7 +325,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testIssueTypeField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -344,7 +344,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testLastViewedField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -367,7 +367,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testLevelField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -385,7 +385,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testOriginalEstimateField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -403,7 +403,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testParentField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -419,7 +419,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testPriorityField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -437,7 +437,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testProjectField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -453,7 +453,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testRemainingEstimateField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -469,7 +469,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testReporterField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -485,7 +485,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testResolutionField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -503,7 +503,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testResolvedField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -526,7 +526,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testSprintField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -547,7 +547,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testStatusField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -567,7 +567,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testSummaryField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -585,7 +585,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testTextField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -601,7 +601,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testTimeSpentField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -617,7 +617,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testUpdatedField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -641,7 +641,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testVoterField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -657,7 +657,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testVotesField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -673,7 +673,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testWatcherField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -689,7 +689,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testWatchersField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -705,7 +705,7 @@ public class JQLFieldBuilderTest {
   @Test
   public void testWorkRatioField() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")

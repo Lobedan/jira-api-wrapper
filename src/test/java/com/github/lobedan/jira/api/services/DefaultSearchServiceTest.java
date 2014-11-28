@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static com.github.lobedan.jira.api.builder.JiraUrlBuilder.JiraUrl;
+import static com.github.lobedan.jira.api.builder.JiraUrlBuilder.jiraUrl;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -37,7 +37,7 @@ public class DefaultSearchServiceTest {
   @Before
   public void setup() throws URISyntaxException {
     service.setBaseUrlBuilder(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")

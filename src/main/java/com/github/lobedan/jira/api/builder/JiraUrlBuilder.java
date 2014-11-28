@@ -3,7 +3,10 @@ package com.github.lobedan.jira.api.builder;
 import java.net.URI;
 
 import com.github.lobedan.jira.api.domain.builder.JQLMetaHolder;
+import com.github.lobedan.jira.api.types.ExpandType;
+import com.github.lobedan.jira.api.types.FieldType;
 import com.github.lobedan.jira.api.types.SchemeType;
+import com.github.lobedan.jira.api.util.StringUtils;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,7 +17,7 @@ import gumi.builders.UrlBuilder;
  * @author svenklemmer
  * @since jira-api-wrapper 0.1.0
  */
-public class JiraUrlBuilder {
+public final class JiraUrlBuilder {
     private static final Logger LOGGER = LogManager.getLogger(JiraUrlBuilder.class);
 
     private UrlBuilder urlBuilder;
@@ -26,7 +29,7 @@ public class JiraUrlBuilder {
         urlBuilder = UrlBuilder.empty();
     }
 
-    public static JiraUrlBuilder JiraUrl() {
+    public static JiraUrlBuilder jiraUrl() {
         return new JiraUrlBuilder();
     }
 
@@ -66,6 +69,31 @@ public class JiraUrlBuilder {
 
     public JQLFieldBuilder jql() {
         return new JQLFieldBuilder(this);
+    }
+
+    public JiraUrlBuilder startAt(int startAt) {
+        urlBuilder = urlBuilder.addParameter("startat", StringUtils.stringify(startAt));
+        return this;
+    }
+
+    public JiraUrlBuilder maxResults(int results) {
+        urlBuilder = urlBuilder.addParameter("maxresults", StringUtils.stringify(results));
+        return this;
+    }
+
+    public JiraUrlBuilder total(int total) {
+        urlBuilder = urlBuilder.addParameter("total", StringUtils.stringify(total));
+        return this;
+    }
+
+    public JiraUrlBuilder fields(FieldType... fields) {
+        urlBuilder = urlBuilder.addParameter("fields", StringUtils.commaSeparatedList(fields));
+        return this;
+    }
+
+    public JiraUrlBuilder expand(ExpandType... expand) {
+        urlBuilder = urlBuilder.addParameter("expand", StringUtils.commaSeparatedList(expand));
+        return this;
     }
 
     public void addJQL(String jqlString) {

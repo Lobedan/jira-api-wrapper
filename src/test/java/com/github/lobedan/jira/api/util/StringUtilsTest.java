@@ -2,7 +2,7 @@ package com.github.lobedan.jira.api.util;
 
 import java.util.Arrays;
 
-import com.github.lobedan.jira.api.types.ExpandTypes;
+import com.github.lobedan.jira.api.types.ExpandType;
 import com.github.lobedan.jira.api.types.SchemeType;
 
 import org.junit.Test;
@@ -27,8 +27,8 @@ public class StringUtilsTest {
     assertThat(StringUtils.stringify(1.00), is("1.0"));
     assertThat(StringUtils.stringify(true), is("true"));
     assertThat(StringUtils.stringify(false), is("false"));
-    assertThat(StringUtils.stringify(ExpandTypes.CHANGELOG), is("changelog"));
-    assertThat(StringUtils.stringify(ExpandTypes.RENDEREDFIELDS), is("renderedfields"));
+    assertThat(StringUtils.stringify(ExpandType.CHANGELOG), is("changelog"));
+    assertThat(StringUtils.stringify(ExpandType.RENDEREDFIELDS), is("renderedfields"));
     assertThat(StringUtils.stringify(SchemeType.HTTP.getName()), is("http"));
     assertThat(StringUtils.stringify(SchemeType.HTTP.getOrdinal()), is("1"));
   }

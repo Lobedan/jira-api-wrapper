@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import static com.github.lobedan.jira.api.builder.JiraUrlBuilder.JiraUrl;
+import static com.github.lobedan.jira.api.builder.JiraUrlBuilder.jiraUrl;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -22,7 +22,7 @@ public class JQLOpsBuilderTest {
   @Test
   public void testEqualNotEqual() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -42,7 +42,7 @@ public class JQLOpsBuilderTest {
   @Test
   public void testGreaterThan() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -60,7 +60,7 @@ public class JQLOpsBuilderTest {
   @Test
   public void testLessThan() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -78,7 +78,7 @@ public class JQLOpsBuilderTest {
   @Test
   public void testInNotIn() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -96,7 +96,7 @@ public class JQLOpsBuilderTest {
   @Test
   public void testContainsDoesNotContain() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -114,7 +114,7 @@ public class JQLOpsBuilderTest {
   @Test
   public void testIsNotIs() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -132,7 +132,7 @@ public class JQLOpsBuilderTest {
   @Test
   public void testWasWasNot() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -150,7 +150,7 @@ public class JQLOpsBuilderTest {
   @Test
   public void testWasInWasNotIn() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -168,7 +168,7 @@ public class JQLOpsBuilderTest {
   @Test
   public void testChanged() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")
@@ -189,7 +189,7 @@ public class JQLOpsBuilderTest {
   @Test
   public void testByFromToBeforeAfter() throws Exception {
     assertThat(
-        JiraUrl()
+        jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
             .path("")

@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import static com.github.lobedan.jira.api.builder.JiraUrlBuilder.JiraUrl;
+import static com.github.lobedan.jira.api.builder.JiraUrlBuilder.jiraUrl;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -25,7 +25,7 @@ public class JQLBuilderTest {
   @Test
   public void testCanBuildJQLQuery() throws Exception {
     //general test
-    assertThat(JiraUrl()
+    assertThat(jiraUrl()
                    .scheme(SchemeType.HTTP)
                    .host("example.com")
                    .path("")
@@ -48,7 +48,7 @@ public class JQLBuilderTest {
 
     //test fields reporter, assignee, created, updated, project, status
     //include test operations is, isNot, after, before, in, was, by
-    assertThat(JiraUrl()
+    assertThat(jiraUrl()
                    .scheme(SchemeType.HTTP)
                    .host("example.com")
                    .path("")

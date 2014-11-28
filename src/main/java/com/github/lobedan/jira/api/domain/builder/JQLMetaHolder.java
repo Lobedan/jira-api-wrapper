@@ -4,7 +4,7 @@ package com.github.lobedan.jira.api.domain.builder;
  * @author svenklemmer
  * @since jira-api-wrapper 0.1.0
  */
-public class JQLMetaHolder {
+public final class JQLMetaHolder {
   private static JQLMetaHolder ourInstance;
   private JQL jql;
 

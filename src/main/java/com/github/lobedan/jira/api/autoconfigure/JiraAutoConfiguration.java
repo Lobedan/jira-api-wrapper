@@ -12,7 +12,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static com.github.lobedan.jira.api.builder.JiraUrlBuilder.JiraUrl;
+import static com.github.lobedan.jira.api.builder.JiraUrlBuilder.jiraUrl;
 
 /**
  * {@link org.springframework.boot.autoconfigure.EnableAutoConfiguration Auto configuration} for jira support.
@@ -30,7 +30,7 @@ public class JiraAutoConfiguration {
   private JiraProperties properties;
 
   @Bean(name = "jiraBaseUrl")
-  public JiraUrlBuilder jiraUrl() {
+  public JiraUrlBuilder jiraBaseUrl() {
 
    SchemeType schemeType;
     if (properties.getScheme().contains("https://")) {
@@ -39,7 +39,7 @@ public class JiraAutoConfiguration {
       schemeType = SchemeType.HTTP;
     }
 
-    return JiraUrl()
+    return jiraUrl()
         .scheme(schemeType)
         .host(properties.getHost())
         .port(properties.getPort())
