@@ -80,12 +80,12 @@ public class JQLOperatorBuilder implements JQLOperator {
 
   @Override
   public JQLKeyword contains(String value) {
-    return addOperatorToKeyword(" ~ " + value);
+    return addOperatorToKeyword(" ~ \"" + value + "\"");
   }
 
   @Override
   public JQLKeyword doesNotContain(String value) {
-    return addOperatorToKeyword(" !~ " + value);
+    return addOperatorToKeyword(" !~ \"" + value + "\"");
   }
 
   @Override

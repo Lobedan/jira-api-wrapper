@@ -6,7 +6,7 @@ package com.github.lobedan.jira.api.domain.dsl.jql;
  */
 public interface JQLOrder {
 
-  void asc();
+  JQLKeyword asc();
 
-  void desc();
+  JQLKeyword desc();
 }

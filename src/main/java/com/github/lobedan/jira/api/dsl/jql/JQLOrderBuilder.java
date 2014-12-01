@@ -1,6 +1,8 @@
 package com.github.lobedan.jira.api.dsl.jql;
 
 import com.github.lobedan.jira.api.domain.dsl.jql.JQL;
+import com.github.lobedan.jira.api.domain.dsl.jql.JQLKeyword;
+import com.github.lobedan.jira.api.domain.dsl.jql.JQLOperator;
 import com.github.lobedan.jira.api.domain.dsl.jql.JQLOrder;
 import com.github.lobedan.jira.api.types.OrderType;
 import com.github.lobedan.jira.api.util.StringUtils;
@@ -16,13 +18,18 @@ public class JQLOrderBuilder implements JQLOrder {
     jql = aJQL;
   }
 
-  @Override
-  public void asc() {
-    jql.add(" " + StringUtils.stringify(OrderType.ASC));
+  private JQLKeyword addOrderType(String field) {
+    jql.add(field);
+    return new JQLKeywordBuilder(jql);
   }
 
   @Override
-  public void desc() {
-    jql.add(" " + StringUtils.stringify(OrderType.DESC));
+  public JQLKeyword asc() {
+    return addOrderType(" " + StringUtils.stringify(OrderType.ASC));
+  }
+
+  @Override
+  public JQLKeyword desc() {
+    return addOrderType(" " + StringUtils.stringify(OrderType.DESC));
   }
 }
