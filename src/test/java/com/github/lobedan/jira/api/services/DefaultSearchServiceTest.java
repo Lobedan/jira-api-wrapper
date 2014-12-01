@@ -20,7 +20,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.net.URISyntaxException;
 
 import static com.github.lobedan.jira.api.dsl.jiraurl.JiraUrlBuilder.jiraUrl;
-import static com.github.lobedan.jira.api.dsl.jql.JQLBuilder.jql;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -43,13 +42,6 @@ public class DefaultSearchServiceTest {
             .host("example.com")
             .path("")
             .apiVersion("latest")
-            .jqlQuery(
-                jql()
-                    .assignee().equal("hans")
-                    .and()
-                    .status().notEquals("Closed")
-                    .andReturn()
-            )
     );
     spy = spy(service);
   }
@@ -57,8 +49,7 @@ public class DefaultSearchServiceTest {
   @Test
   public void testCanGetIssueByKey() throws Exception {
     assertThat(spy.getBaseUrlBuilder().build().toString(),
-               is("http://example.com/rest/api/latest/?jql=assignee%20%3D%20"
-                  + "hans%20AND%20status%20%21%3D%20Closed"));
+            is("http://example.com/rest/api/latest/"));
 
     Search testObject = new Search();
     testObject.setTotal(1);

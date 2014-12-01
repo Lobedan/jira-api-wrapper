@@ -14,7 +14,7 @@ import static com.github.lobedan.jira.api.dsl.jql.JQLBuilder.jql;
 public class ParameterCountExceptionTest {
 
     @Test(expected = ParameterCountException.class)
-  public void testIsThrownWhenOnlyOneWhenAtLeastTwoNeeded() throws Exception {
+    public void testIsThrownWhenOnlyOneWhenAtLeastTwoNeeded() throws Exception {
         jql().status().wasIn("Hallo");
     }
 }
