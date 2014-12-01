@@ -70,11 +70,13 @@ public class JQLOperatorBuilder implements JQLOperator {
 
   @Override
   public JQLKeyword in(Object... values) {
+    StringUtils.verifyParams(2, values);
     return addOperatorToKeyword(" in (" + StringUtils.commaSeparatedList(values) + ")");
   }
 
   @Override
   public JQLKeyword notIn(Object... values) {
+    StringUtils.verifyParams(2, values);
     return addOperatorToKeyword(" not in (" + StringUtils.commaSeparatedList(values) + ")");
   }
 
@@ -105,11 +107,13 @@ public class JQLOperatorBuilder implements JQLOperator {
 
   @Override
   public JQLPredicate wasIn(Object... values) {
+    StringUtils.verifyParams(2, values);
     return addOperatorToPredicate(" was in (" + StringUtils.commaSeparatedList(values) + ")");
   }
 
   @Override
   public JQLPredicate wasNotIn(Object... values) {
+    StringUtils.verifyParams(2, values);
     return addOperatorToPredicate(" was not in (" + StringUtils.commaSeparatedList(values) + ")");
   }
 
@@ -127,4 +131,6 @@ public class JQLOperatorBuilder implements JQLOperator {
   public JQLOperator not() {
     return addOperator(" not");
   }
+
+
 }

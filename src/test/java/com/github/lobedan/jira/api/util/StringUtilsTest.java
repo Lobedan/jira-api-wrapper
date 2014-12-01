@@ -1,18 +1,19 @@
 package com.github.lobedan.jira.api.util;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-
+import com.github.lobedan.jira.api.exceptions.ParameterCountException;
 import com.github.lobedan.jira.api.types.ExpandType;
 import com.github.lobedan.jira.api.types.SchemeType;
-
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+
+import static com.github.lobedan.jira.api.dsl.jql.JQLBuilder.jql;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -66,5 +67,15 @@ public class StringUtilsTest {
   @Test(expected = ParseException.class)
   public void testCanNOTConvertStringDateToDateObject() throws Exception {
     StringUtils.stringToDate("23");
+  }
+
+  @Test
+  public void canVerifyParameters() throws Exception {
+    jql().assignee().wasIn("Sven", "Markus");
+  }
+
+  @Test(expected = ParameterCountException.class)
+  public void canVerifyParametersFail() throws Exception {
+    jql().assignee().wasIn("Sven");
   }
 }

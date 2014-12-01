@@ -1,5 +1,7 @@
 package com.github.lobedan.jira.api.util;
 
+import com.github.lobedan.jira.api.exceptions.ParameterCountException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -44,6 +46,12 @@ public class StringUtils {
 
   public static String dateToString(Date aDate) {
     return new SimpleDateFormat("yyyy/MM/dd HH:mm").format(aDate);
+  }
+
+  public static void verifyParams(int minLength, Object... values) {
+    if (values.length < minLength) {
+      throw new ParameterCountException("Need at least " + minLength + " values");
+    }
   }
 
   /**

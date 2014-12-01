@@ -43,6 +43,7 @@ public class JQLKeywordBuilder implements JQLKeyword {
 
   @Override
   public JQLOrder orderBy(String... fieldNames) {
+    StringUtils.verifyParams(2, fieldNames);
     return addKeywordToOrder(" order by " + StringUtils.commaSeparatedList(fieldNames));
   }
 

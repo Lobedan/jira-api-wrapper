@@ -21,3 +21,4 @@
 ** *Support concrete date values*
 ** *CRUD operations for issues
 ** *Support custom fields in JiraUrl-DSL fields filter
+** *Mock HttpRestTemplate in Service Tests to return .json files
