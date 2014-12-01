@@ -1,4 +1,4 @@
-package com.github.lobedan.jira.api.domain;
+package com.github.lobedan.jira.api.domain.jira;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,7 +8,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 /**
  * Information about the person who is asigned to that task
  * <p/>
- * TODO: maybe it will be combined with {@link com.github.lobedan.jira.api.domain.Reporter} in a future release
+ * TODO: maybe it will be combined with {@link Reporter} in a future release
  * because they both represents persons and hold the same information
  *
  * @author Sven Klemmer

@@ -19,4 +19,4 @@
 
 ** *Support Field aliases* see https://confluence.atlassian.com/display/JIRA/Advanced+Searching#AdvancedSearching-Filter
 ** *Support concrete date values*
-** *CRUD operations for issues (GET Done)
+** *CRUD operations for issues

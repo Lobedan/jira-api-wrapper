@@ -1,4 +1,4 @@
-package com.github.lobedan.jira.api.domain;
+package com.github.lobedan.jira.api.domain.jira;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

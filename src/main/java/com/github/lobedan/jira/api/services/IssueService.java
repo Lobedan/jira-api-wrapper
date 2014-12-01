@@ -8,7 +8,7 @@
  */
 package com.github.lobedan.jira.api.services;
 
-import com.github.lobedan.jira.api.domain.Issue;
+import com.github.lobedan.jira.api.domain.jira.Issue;
 
 /**
  * interface which provides basic methods for working with issues

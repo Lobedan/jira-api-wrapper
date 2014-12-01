@@ -9,7 +9,7 @@
 package com.github.lobedan.jira.api.services;
 
 import com.github.lobedan.jira.api.builder.JiraUrlBuilder;
-import com.github.lobedan.jira.api.domain.Search;
+import com.github.lobedan.jira.api.domain.jira.Search;
 import com.github.lobedan.jira.api.exceptions.NoIssuesFoundException;
 
 import org.apache.logging.log4j.LogManager;
@@ -28,15 +28,15 @@ public class DefaultSearchService implements SearchService, HttpRestTemplateAwar
   private HttpRestTemplate restTemplate;
 
   @Override
+  public JiraUrlBuilder getBaseUrlBuilder() {
+    return baseUrlBuilder;
+  }
+
+  @Override
   @Autowired
   @Qualifier("jiraBaseUrlBuilder")
   public void setBaseUrlBuilder(JiraUrlBuilder aUrlBuilder) {
     this.baseUrlBuilder = aUrlBuilder;
-  }
-
-  @Override
-  public JiraUrlBuilder getBaseUrlBuilder() {
-    return baseUrlBuilder;
   }
 
   @Override

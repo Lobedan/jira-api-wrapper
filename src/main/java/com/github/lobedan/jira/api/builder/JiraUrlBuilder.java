@@ -2,7 +2,7 @@ package com.github.lobedan.jira.api.builder;
 
 import java.net.URI;
 
-import com.github.lobedan.jira.api.domain.builder.JQLMetaHolder;
+import com.github.lobedan.jira.api.domain.JQL;
 import com.github.lobedan.jira.api.types.ExpandType;
 import com.github.lobedan.jira.api.types.FieldType;
 import com.github.lobedan.jira.api.types.SchemeType;
@@ -25,7 +25,6 @@ public final class JiraUrlBuilder {
     private URI latest;
 
     private JiraUrlBuilder() {
-        JQLMetaHolder.getInstance().jql().clear();
         urlBuilder = UrlBuilder.empty();
     }
 
@@ -67,8 +66,13 @@ public final class JiraUrlBuilder {
         return this;
     }
 
-    public JQLFieldBuilder jql() {
-        return new JQLFieldBuilder(this);
+    public JiraUrlBuilder jqlQuery(String jql) {
+        urlBuilder = urlBuilder.addParameter("jql", jql);
+        return this;
+    }
+
+    public JiraUrlBuilder jqlQuery(JQL aJQL) {
+        return jqlQuery(aJQL.build());
     }
 
     public JiraUrlBuilder startAt(int startAt) {
@@ -96,14 +100,6 @@ public final class JiraUrlBuilder {
         return this;
     }
 
-    public void addJQL(String jqlString) {
-        urlBuilder = urlBuilder.addParameter("jql", jqlString);
-    }
-
-    public String getJQL() {
-        return JQLMetaHolder.getInstance().jql().sb().toString();
-    }
-
     public URI build() {
         if (!wasBuild) {
             latest = urlBuilder.toUri();
@@ -116,7 +112,6 @@ public final class JiraUrlBuilder {
 
     private void clearAll() {
         urlBuilder = UrlBuilder.empty();
-        JQLMetaHolder.getInstance().clear();
         wasBuild = false;
     }
 }

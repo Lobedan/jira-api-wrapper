@@ -1,5 +1,8 @@
 package com.github.lobedan.jira.api.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -9,6 +12,39 @@ import java.util.List;
  * @since 0.1.0
  */
 public class StringUtils {
+
+  /**
+   * Formats a date given as a string in a stringobject
+   * allowed dates are
+   * <p/>
+   * "yyyy/MM/dd HH:mm"
+   * "yyyy-MM-dd HH:mm"
+   * "yyyy/MM/dd"
+   * "yyyy-MM-dd"
+   *
+   * @param date to convert
+   * @return date object
+   */
+  public static Date stringToDate(String date) throws ParseException {
+    String pattern;
+    if (date.contains("/") && date.contains(":")) {
+      pattern = "yyyy/MM/dd HH:mm";
+    } else if (date.contains("/") && !date.contains(":")) {
+      pattern = "yyyy/MM/dd";
+    } else if (date.contains("-") && date.contains(":")) {
+      pattern = "yyyy-MM-dd HH:mm";
+    } else if (date.contains("-") && !date.contains(":")) {
+      pattern = "yyyy-MM-dd";
+    } else {
+      pattern = "dd.mm.yyyy";
+    }
+
+    return new SimpleDateFormat(pattern).parse(date);
+  }
+
+  public static String dateToString(Date aDate) {
+    return new SimpleDateFormat("yyyy/MM/dd HH:mm").format(aDate);
+  }
 
   /**
    * Converts a object into a string

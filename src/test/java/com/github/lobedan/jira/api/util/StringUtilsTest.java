@@ -1,10 +1,14 @@
 package com.github.lobedan.jira.api.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 import com.github.lobedan.jira.api.types.ExpandType;
 import com.github.lobedan.jira.api.types.SchemeType;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -49,5 +53,18 @@ public class StringUtilsTest {
                is("test test2 test3"));
     assertThat(StringUtils.whiteSpaceSeparatedList(1, 2, 3), is("1 2 3"));
     assertThat(StringUtils.whiteSpaceSeparatedList(Arrays.asList(new Object[]{ 1, 2, 3 })), is("1 2 3"));
+  }
+
+  @Ignore
+  public void testCanConvertStringDateToDateObject() throws Exception {
+    Date date = new Date();
+    String stringDate = new SimpleDateFormat("yyyy-mm-dd").format(date);
+
+    assertThat(StringUtils.stringToDate(stringDate), is(date));
+  }
+
+  @Test(expected = ParseException.class)
+  public void testCanNOTConvertStringDateToDateObject() throws Exception {
+    StringUtils.stringToDate("23");
   }
 }

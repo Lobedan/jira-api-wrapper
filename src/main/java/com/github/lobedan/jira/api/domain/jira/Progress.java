@@ -1,4 +1,4 @@
-package com.github.lobedan.jira.api.domain;
+package com.github.lobedan.jira.api.domain.jira;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,17 +6,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
- * progress which the task should have at this moment
- * normaly it should be the same like {@link com.github.lobedan.jira.api.domain.Progress}
- * <p/>
- * TODO: but because the object has the same type its maybe better to combine them in one single object
+ * this somehow tells how much that task is ongoing in development, spec or whatever
+ * it also provides a value in percent
  *
  * @author Sven Klemmer
  * @since 0.1.0
  */
-@JsonIgnoreProperties
-public class AggregateProgress {
-
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Progress {
   @JsonProperty(value = "progress")
   private long progress;
 
@@ -26,7 +23,7 @@ public class AggregateProgress {
   @JsonProperty(value = "percent")
   private double percent;
 
-  public AggregateProgress() {
+  public Progress() {
   }
 
   public long getProgress() {
@@ -62,15 +59,15 @@ public class AggregateProgress {
       return false;
     }
 
-    AggregateProgress that = (AggregateProgress) o;
+    Progress progress1 = (Progress) o;
 
-    if (Double.compare(that.percent, percent) != 0) {
+    if (Double.compare(progress1.percent, percent) != 0) {
       return false;
     }
-    if (progress != that.progress) {
+    if (progress != progress1.progress) {
       return false;
     }
-    if (total != that.total) {
+    if (total != progress1.total) {
       return false;
     }
 
@@ -89,6 +86,7 @@ public class AggregateProgress {
   }
 
   @Override
+
   public String toString() {
     return new ToStringBuilder(this)
         .append("progress", progress)

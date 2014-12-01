@@ -1,4 +1,4 @@
-package com.github.lobedan.jira.api.domain;
+package com.github.lobedan.jira.api.domain.jira;
 
 import java.util.Arrays;
 
@@ -14,11 +14,11 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  * it also leads to other objects
  *
  * @author Sven Klemmer
- * @see com.github.lobedan.jira.api.domain.Type
- * @see com.github.lobedan.jira.api.domain.Progress
- * @see com.github.lobedan.jira.api.domain.Resolution
+ * @see Type
+ * @see Progress
+ * @see Resolution
  * @see java.util.Date
- * @see com.github.lobedan.jira.api.domain.Reporter
+ * @see Reporter
  * <p/>
  * TODO: Custom fields will be supported in a feature release
  * TODO: maybe we will make a big object for all fields and dont split it up into small ones

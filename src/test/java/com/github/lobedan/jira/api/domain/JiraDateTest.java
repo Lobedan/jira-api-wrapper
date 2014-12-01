@@ -2,6 +2,8 @@ package com.github.lobedan.jira.api.domain;
 
 import java.text.ParseException;
 
+import com.github.lobedan.jira.api.domain.jira.JiraDate;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

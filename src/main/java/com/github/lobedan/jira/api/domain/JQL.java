@@ -1,4 +1,4 @@
-package com.github.lobedan.jira.api.domain.builder;
+package com.github.lobedan.jira.api.domain;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,5 +27,9 @@ public class JQL {
 
     public void clear() {
         sb = new StringBuilder();
+    }
+
+    public String build() {
+        return sb.toString();
     }
 }

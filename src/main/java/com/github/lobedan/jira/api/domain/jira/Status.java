@@ -1,4 +1,4 @@
-package com.github.lobedan.jira.api.domain;
+package com.github.lobedan.jira.api.domain.jira;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,13 +6,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
- * simple information about the resolution of a task and a simple description
+ * Simple the status of a task e.g is it closed, resolved etc
  *
  * @author Sven Klemmer
  * @since 0.1.0
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Resolution {
+public class Status {
 
   @JsonProperty(value = "self")
   private String self;
@@ -26,11 +26,19 @@ public class Resolution {
   @JsonProperty(value = "name")
   private String name;
 
-  public Resolution() {
+  public Status() {
+  }
+
+  public String getSelf() {
+
+    return self;
+  }
+
+  public void setSelf(String self) {
+    this.self = self;
   }
 
   public long getId() {
-
     return id;
   }
 
@@ -54,15 +62,6 @@ public class Resolution {
     this.name = name;
   }
 
-  public String getSelf() {
-
-    return self;
-  }
-
-  public void setSelf(String self) {
-    this.self = self;
-  }
-
   @Override
   public boolean equals(Object o) {
 
@@ -73,18 +72,18 @@ public class Resolution {
       return false;
     }
 
-    Resolution that = (Resolution) o;
+    Status status = (Status) o;
 
-    if (id != that.id) {
+    if (id != status.id) {
       return false;
     }
-    if (description != null ? !description.equals(that.description) : that.description != null) {
+    if (description != null ? !description.equals(status.description) : status.description != null) {
       return false;
     }
-    if (name != null ? !name.equals(that.name) : that.name != null) {
+    if (name != null ? !name.equals(status.name) : status.name != null) {
       return false;
     }
-    if (self != null ? !self.equals(that.self) : that.self != null) {
+    if (self != null ? !self.equals(status.self) : status.self != null) {
       return false;
     }
 

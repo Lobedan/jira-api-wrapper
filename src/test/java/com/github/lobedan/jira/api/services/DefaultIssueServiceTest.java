@@ -10,7 +10,7 @@ package com.github.lobedan.jira.api.services;
 
 import java.net.URISyntaxException;
 
-import com.github.lobedan.jira.api.domain.Issue;
+import com.github.lobedan.jira.api.domain.jira.Issue;
 import com.github.lobedan.jira.api.types.SchemeType;
 
 import org.apache.logging.log4j.LogManager;

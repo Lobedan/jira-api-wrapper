@@ -10,7 +10,7 @@ package com.github.lobedan.jira.api.services;
 
 import java.net.URISyntaxException;
 
-import com.github.lobedan.jira.api.domain.Search;
+import com.github.lobedan.jira.api.domain.jira.Search;
 import com.github.lobedan.jira.api.types.SchemeType;
 
 import org.junit.Before;
@@ -21,6 +21,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static com.github.lobedan.jira.api.builder.JiraUrlBuilder.jiraUrl;
+import static com.github.lobedan.jira.api.dsl.builder.JQLBuilder.jql;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -42,11 +43,13 @@ public class DefaultSearchServiceTest {
             .host("example.com")
             .path("")
             .apiVersion("latest")
-            .jql()
-            .assignee().equal("hans")
-            .and()
-            .status().notEqual("Closed")
-            .end()
+            .jqlQuery(
+                jql()
+                    .assignee().equal("hans")
+                    .and()
+                    .status().notEquals("Closed")
+                    .andReturn()
+            )
     );
     spy = spy(service);
   }

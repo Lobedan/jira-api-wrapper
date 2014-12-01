@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import static com.github.lobedan.jira.api.builder.JiraUrlBuilder.jiraUrl;
+import static com.github.lobedan.jira.api.dsl.builder.JQLBuilder.jql;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -76,16 +77,17 @@ public class JiraUrlBuilderTest {
             .port(8080)
             .path("/jira")
             .apiVersion("latest")
-            .jql()
-            .reporter().equal("Markus")
-            .or()
-            .assignee().equal("Sven")
-            .and()
-            .created().changed().after("2012-02-13")
-            .end()
+            .jqlQuery(
+                jql()
+                    .reporter().equal("Markus")
+                    .or()
+                    .assignee().equal("Sven")
+                    .and()
+                    .created().changed().after("2012-02-13")
+                    .andReturn()
+            )
             .build()
             .toString(),
-        is("http://example.com:8080/jira/rest/api/latest/?jql=reporter%20%3D%20Markus%20OR%20assignee%20%3D%20"
-           + "Sven%20AND%20created%20CHANGED%20%20AFTER%202012-02-13"));
+        is("http://example.com:8080/jira/rest/api/latest/?jql=reporter%20%3D%20Markus%20OR%20assignee%20%3D%20Sven%20AND%20created%20CHANGED%20after%202012-02-13"));
   }
 }

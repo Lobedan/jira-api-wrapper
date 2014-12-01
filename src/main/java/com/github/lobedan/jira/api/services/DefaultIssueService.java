@@ -1,7 +1,7 @@
 package com.github.lobedan.jira.api.services;
 
 import com.github.lobedan.jira.api.builder.JiraUrlBuilder;
-import com.github.lobedan.jira.api.domain.Issue;
+import com.github.lobedan.jira.api.domain.jira.Issue;
 import com.github.lobedan.jira.api.exceptions.IssueNotFoundException;
 
 import org.apache.logging.log4j.LogManager;
