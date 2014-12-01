@@ -86,13 +86,18 @@ public class JQLFieldBuilder implements Field {
   }
 
   @Override
+  public Operator dueDate() {
+    return addField("dueDate");
+  }
+
+  @Override
   public Operator environment() {
     return addField("environment");
   }
 
   @Override
   public Operator epicLink() {
-    return addField("epic link");
+    return addField("\"epic link\"");
   }
 
   @Override
@@ -106,8 +111,23 @@ public class JQLFieldBuilder implements Field {
   }
 
   @Override
+  public Operator id() {
+    return addField("id");
+  }
+
+  @Override
+  public Operator issue() {
+    return addField("issue");
+  }
+
+  @Override
   public Operator issueKey() {
     return addField("issueKey");
+  }
+
+  @Override
+  public Operator key() {
+    return addField("key");
   }
 
   @Override
@@ -151,13 +171,33 @@ public class JQLFieldBuilder implements Field {
   }
 
   @Override
+  public Operator request() {
+    return addField("request");
+  }
+
+  @Override
   public Operator resolution() {
     return addField("resolution");
   }
 
   @Override
+  public Operator resolutionDate() {
+    return addField("resolutionDate");
+  }
+
+  @Override
   public Operator resolved() {
     return addField("resolved");
+  }
+
+  @Override
+  public Operator savedFilter() {
+    return addField("savedFilter");
+  }
+
+  @Override
+  public Operator searchRequest() {
+    return addField("searchRequest");
   }
 
   @Override
@@ -178,6 +218,16 @@ public class JQLFieldBuilder implements Field {
   @Override
   public Operator text() {
     return addField("text");
+  }
+
+  @Override
+  public Operator timeEstimate() {
+    return addField("timeEstimate");
+  }
+
+  @Override
+  public Operator timeOriginalEstimate() {
+    return addField("timeOriginalEstimate");
   }
 
   @Override

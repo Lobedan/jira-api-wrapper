@@ -31,6 +31,7 @@ import static org.mockito.Mockito.spy;
 @ContextConfiguration(locations = "classpath:test-app-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class DefaultSearchServiceTest {
+
   @Autowired
   private DefaultSearchService service;
   private DefaultSearchService spy;

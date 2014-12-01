@@ -172,6 +172,11 @@ public interface Field {
   Operator due();
 
   /**
+   * @see #due()
+   */
+  Operator dueDate();
+
+  /**
    *
    */
   Operator environment();
@@ -192,9 +197,24 @@ public interface Field {
   Operator fixVersion();
 
   /**
+   * @see #issueKey()
+   */
+  Operator id();
+
+  /**
+   * @see #issueKey()
+   */
+  Operator issue();
+
+  /**
    *
    */
   Operator issueKey();
+
+  /**
+   * @see #issueKey()
+   */
+  Operator key();
 
   /**
    *
@@ -237,6 +257,16 @@ public interface Field {
   Operator reporter();
 
   /**
+   * @see #filter()
+   */
+  Operator request();
+
+  /**
+   * @see #resolved()
+   */
+  Operator resolutionDate();
+
+  /**
    *
    */
   Operator resolution();
@@ -245,6 +275,16 @@ public interface Field {
    *
    */
   Operator resolved();
+
+  /**
+   * @see #filter()
+   */
+  Operator savedFilter();
+
+  /**
+   * @see #filter()
+   */
+  Operator searchRequest();
 
   /**
    *
@@ -265,6 +305,16 @@ public interface Field {
    *
    */
   Operator text();
+
+  /**
+   * @see #remainingEstimate()
+   */
+  Operator timeEstimate();
+
+  /**
+   *
+   */
+  Operator timeOriginalEstimate();
 
   /**
    *
