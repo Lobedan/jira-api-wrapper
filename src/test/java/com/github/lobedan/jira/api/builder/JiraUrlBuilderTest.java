@@ -9,8 +9,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import static com.github.lobedan.jira.api.builder.JiraUrlBuilder.jiraUrl;
-import static com.github.lobedan.jira.api.dsl.builder.JQLBuilder.jql;
+import static com.github.lobedan.jira.api.dsl.jiraurl.JiraUrlBuilder.jiraUrl;
+import static com.github.lobedan.jira.api.dsl.jql.JQLBuilder.jql;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 

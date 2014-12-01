@@ -1,9 +1,8 @@
-package com.github.lobedan.jira.api.dsl.builder;
+package com.github.lobedan.jira.api.dsl.jql;
 
-import com.github.lobedan.jira.api.domain.Field;
-import com.github.lobedan.jira.api.domain.JQL;
-import com.github.lobedan.jira.api.domain.Operator;
-
+import com.github.lobedan.jira.api.domain.dsl.jql.JQL;
+import com.github.lobedan.jira.api.domain.dsl.jql.JQLField;
+import com.github.lobedan.jira.api.domain.dsl.jql.JQLOperator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,7 +10,7 @@ import org.apache.logging.log4j.Logger;
  * @author svenklemmer
  * @since jira-api-wrapper 0.1.0
  */
-public class JQLFieldBuilder implements Field {
+public class JQLFieldBuilder implements JQLField {
   private static final Logger LOGGER = LogManager.getLogger(JQLFieldBuilder.class);
 
   private JQL jql;
@@ -20,253 +19,252 @@ public class JQLFieldBuilder implements Field {
     this.jql = aJql;
   }
 
-  private Operator addField(String field) {
+  private JQLOperator addField(String field) {
     jql.add(field);
     return new JQLOperatorBuilder(jql);
   }
 
   @Override
-  public Operator affectedVersion() {
+  public JQLOperator affectedVersion() {
     return addField("affectedVersion");
   }
 
   @Override
-  public Operator assignee() {
+  public JQLOperator assignee() {
     return addField("assignee");
   }
 
   @Override
-  public Operator attachments() {
+  public JQLOperator attachments() {
     return addField("attachments");
   }
 
   @Override
-  public Operator category() {
+  public JQLOperator category() {
     return addField("category");
   }
 
   @Override
-  public Operator comment() {
+  public JQLOperator comment() {
     return addField("comment");
   }
 
   @Override
-  public Operator component() {
+  public JQLOperator component() {
     return addField("component");
   }
 
   @Override
-  public Operator created() {
+  public JQLOperator created() {
     return addField("created");
   }
 
   @Override
-  public Operator createdDate() {
+  public JQLOperator createdDate() {
     return created();
   }
 
   @Override
-  public Operator creator() {
+  public JQLOperator creator() {
     return addField("creator");
   }
 
   @Override
-  public Operator customField(String fieldName) {
+  public JQLOperator customField(String fieldName) {
     return addField(fieldName);
   }
 
   @Override
-  public Operator description() {
+  public JQLOperator description() {
     return addField("description");
   }
 
   @Override
-  public Operator due() {
+  public JQLOperator due() {
     return addField("due");
   }
 
   @Override
-  public Operator dueDate() {
+  public JQLOperator dueDate() {
     return addField("dueDate");
   }
 
   @Override
-  public Operator environment() {
+  public JQLOperator environment() {
     return addField("environment");
   }
 
   @Override
-  public Operator epicLink() {
+  public JQLOperator epicLink() {
     return addField("\"epic link\"");
   }
 
   @Override
-  public Operator filter() {
+  public JQLOperator filter() {
     return addField("filter");
   }
 
   @Override
-  public Operator fixVersion() {
+  public JQLOperator fixVersion() {
     return addField("fixVersion");
   }
 
   @Override
-  public Operator id() {
+  public JQLOperator id() {
     return addField("id");
   }
 
   @Override
-  public Operator issue() {
+  public JQLOperator issue() {
     return addField("issue");
   }
 
   @Override
-  public Operator issueKey() {
+  public JQLOperator issueKey() {
     return addField("issueKey");
   }
 
   @Override
-  public Operator key() {
+  public JQLOperator key() {
     return addField("key");
   }
 
   @Override
-  public Operator lastViewed() {
+  public JQLOperator lastViewed() {
     return addField("lastViewed");
   }
 
   @Override
-  public Operator level() {
+  public JQLOperator level() {
     return addField("level");
   }
 
   @Override
-  public Operator originalEstimate() {
+  public JQLOperator originalEstimate() {
     return addField("originalEstimate");
   }
 
   @Override
-  public Operator parent() {
+  public JQLOperator parent() {
     return addField("parent");
   }
 
   @Override
-  public Operator priority() {
+  public JQLOperator priority() {
     return addField("priority");
   }
 
   @Override
-  public Operator project() {
+  public JQLOperator project() {
     return addField("project");
   }
 
   @Override
-  public Operator remainingEstimate() {
+  public JQLOperator remainingEstimate() {
     return addField("remainingEstimate");
   }
 
   @Override
-  public Operator reporter() {
+  public JQLOperator reporter() {
     return addField("reporter");
   }
 
   @Override
-  public Operator request() {
+  public JQLOperator request() {
     return addField("request");
   }
 
   @Override
-  public Operator resolution() {
+  public JQLOperator resolution() {
     return addField("resolution");
   }
 
   @Override
-  public Operator resolutionDate() {
+  public JQLOperator resolutionDate() {
     return addField("resolutionDate");
   }
 
   @Override
-  public Operator resolved() {
+  public JQLOperator resolved() {
     return addField("resolved");
   }
 
   @Override
-  public Operator savedFilter() {
+  public JQLOperator savedFilter() {
     return addField("savedFilter");
   }
 
   @Override
-  public Operator searchRequest() {
+  public JQLOperator searchRequest() {
     return addField("searchRequest");
   }
 
   @Override
-  public Operator sprint() {
+  public JQLOperator sprint() {
     return addField("sprint");
   }
 
   @Override
-  public Operator status() {
+  public JQLOperator status() {
     return addField("status");
   }
 
   @Override
-  public Operator summary() {
+  public JQLOperator summary() {
     return addField("summary");
   }
 
   @Override
-  public Operator text() {
+  public JQLOperator text() {
     return addField("text");
   }
-
   @Override
-  public Operator timeEstimate() {
+  public JQLOperator timeEstimate() {
     return addField("timeEstimate");
   }
 
   @Override
-  public Operator timeOriginalEstimate() {
+  public JQLOperator timeOriginalEstimate() {
     return addField("timeOriginalEstimate");
   }
 
   @Override
-  public Operator type() {
+  public JQLOperator type() {
     return addField("type");
   }
 
   @Override
-  public Operator timeSpent() {
+  public JQLOperator timeSpent() {
     return addField("timeSpent");
   }
 
   @Override
-  public Operator updated() {
+  public JQLOperator updated() {
     return addField("updated");
   }
 
   @Override
-  public Operator voter() {
+  public JQLOperator voter() {
     return addField("voter");
   }
 
   @Override
-  public Operator votes() {
+  public JQLOperator votes() {
     return addField("votes");
   }
 
   @Override
-  public Operator watcher() {
+  public JQLOperator watcher() {
     return addField("watcher");
   }
 
   @Override
-  public Operator watchers() {
+  public JQLOperator watchers() {
     return addField("watchers");
   }
 
   @Override
-  public Operator workRatio() {
+  public JQLOperator workRatio() {
     return addField("workRatio");
   }
 }

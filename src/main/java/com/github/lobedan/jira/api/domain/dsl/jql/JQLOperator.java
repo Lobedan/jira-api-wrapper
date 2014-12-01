@@ -1,14 +1,14 @@
-package com.github.lobedan.jira.api.domain;
+package com.github.lobedan.jira.api.domain.dsl.jql;
 
 /**
  * An operator in JQL is one or more symbols or words which compares the value of a field on its left with one or more
  * values (or functions) on its right, such that only true results are retrieved by the clause.
- * Some operators may use the NOT keyword.
+ * Some operators may use the NOT JQLKeyword.
  *
  * @author svenklemmer
  * @since jira-api-wrapper 0.1.0
  */
-public interface Operator {
+public interface JQLOperator {
 
   /**
    * The "=" operator is used to search for issues where the value of the specified field exactly matches the specified value.
@@ -17,9 +17,9 @@ public interface Operator {
    * @see #contains(String)
    * <p/>
    * To find issues where the value of a specified field exactly matches multiple values, use multiple "=" statements with the AND operator.
-   * @see com.github.lobedan.jira.api.domain.Keyword#and()
+   * @see JQLKeyword#and()
    */
-  Keyword equal(Object value);
+  JQLKeyword equal(Object value);
 
   /**
    * The "!=" operator is used to search for issues where the value of the specified field does not match the specified value.
@@ -32,7 +32,7 @@ public interface Operator {
    * will only match issues that have a component and the component is not "fred". To find issues that have a component other
    * than "fred" or have no component, you would need to type: component != fred or component is empty.
    */
-  Keyword notEquals(Object value);
+  JQLKeyword notEquals(Object value);
 
   /**
    * The ">" operator is used to search for issues where the value of the specified field is greater than the
@@ -41,9 +41,9 @@ public interface Operator {
    * Note that the ">" operator can only be used with fields which support ordering (e.g. date fields and version fields).
    * To see a field's supported operators, check the individual field reference.
    *
-   * @see com.github.lobedan.jira.api.domain.Field
+   * @see JQLField
    */
-  Keyword greaterThan(Object value);
+  JQLKeyword greaterThan(Object value);
 
   /**
    * The ">=" operator is used to search for issues where the value of the specified field is greater than or equal to the
@@ -52,9 +52,9 @@ public interface Operator {
    * Note that the ">=" operator can only be used with fields which support ordering (e.g. date fields and version fields).
    * To see a field's supported operators, check the individual field reference.
    *
-   * @see com.github.lobedan.jira.api.domain.Field
+   * @see JQLField
    */
-  Keyword greaterThanEquals(Object value);
+  JQLKeyword greaterThanEquals(Object value);
 
   /**
    * The "<" operator is used to search for issues where the value of the specified field is less than the specified value.
@@ -63,9 +63,9 @@ public interface Operator {
    * Note that the "<" operator can only be used with fields which support ordering (e.g. date fields and version fields).
    * To see a field's supported operators, check the individual field reference.
    *
-   * @see com.github.lobedan.jira.api.domain.Field
+   * @see JQLField
    */
-  Keyword lessThan(Object value);
+  JQLKeyword lessThan(Object value);
 
   /**
    * The "<=" operator is used to search for issues where the value of the specified field is less than or equal to than
@@ -74,9 +74,9 @@ public interface Operator {
    * Note that the "<=" operator can only be used with fields which support ordering (e.g. date fields and version fields).
    * To see a field's supported operators, check the individual field reference.
    *
-   * @see com.github.lobedan.jira.api.domain.Field
+   * @see JQLField
    */
-  Keyword lessThanEquals(Object value);
+  JQLKeyword lessThanEquals(Object value);
 
   /**
    * The "IN" operator is used to search for issues where the value of the specified field is one of multiple specified values.
@@ -85,7 +85,7 @@ public interface Operator {
    * Using "IN" is equivalent to using multiple EQUALS (=) statements, but is shorter and more convenient. That is,
    * typing reporter IN (tom, jane, harry) is the same as typing reporter = "tom" OR reporter = "jane" OR reporter = "harry".
    */
-  Keyword in(Object... values);
+  JQLKeyword in(Object... values);
 
   /**
    * The "NOT IN" operator is used to search for issues where the value of the specified field is not one of multiple specified values.
@@ -97,33 +97,33 @@ public interface Operator {
    * (jack,jill) will only match issues that have an assignee and the assignee is not "jack" or "jill". To find issues that are
    * assigned to someone other than "jack" or "jill" or are unassigned, you would need to type: assignee not in (jack,jill) or assignee is empty.
    */
-  Keyword notIn(Object... values);
+  JQLKeyword notIn(Object... values);
 
   /**
    * The "~" operator is used to search for issues where the value of the specified field matches the specified value
    * (either an exact match or a "fuzzy" match — see examples below). For use with text fields only, i.e.:
    *
-   * @see Field#summary()
-   * @see Field#description()
-   * @see Field#environment()
-   * @see Field#comment()
+   * @see JQLField#summary()
+   * @see JQLField#description()
+   * @see JQLField#environment()
+   * @see JQLField#comment()
    * <p/>
    * Note: Custom fields are not supported yet
    */
-  Keyword contains(String value);
+  JQLKeyword contains(String value);
 
   /**
    * The "!~" operator is used to search for issues where the value of the specified field is not a "fuzzy" match for
    * the specified value. For use with text fields only, i.e.:
    *
-   * @see Field#summary()
-   * @see Field#description()
-   * @see Field#environment()
-   * @see Field#comment()
+   * @see JQLField#summary()
+   * @see JQLField#description()
+   * @see JQLField#environment()
+   * @see JQLField#comment()
    * <p/>
    * Note: Custom fields are not supported yet
    */
-  Keyword doesNotContain(String value);
+  JQLKeyword doesNotContain(String value);
 
   /**
    * The "IS" operator can only be used with EMPTY or NULL. That is, it is used to search for issues where the specified
@@ -131,9 +131,9 @@ public interface Operator {
    * <p/>
    * Note that not all fields are compatible with this operator; see the individual field reference for details.
    *
-   * @see com.github.lobedan.jira.api.domain.Field
+   * @see JQLField
    */
-  Value is();
+  JQLValue is();
 
   /**
    * The "IS NOT" operator can only be used with EMPTY or NULL. That is, it is used to search for issues where the
@@ -141,9 +141,9 @@ public interface Operator {
    * <p/>
    * Note that not all fields are compatible with this operator; see the individual field reference for details.
    *
-   * @see com.github.lobedan.jira.api.domain.Field
+   * @see JQLField
    */
-  Value isNot();
+  JQLValue isNot();
 
   /**
    * The "WAS" operator is used to find issues that currently have, or previously had, the specified value for the specified field.
@@ -159,7 +159,7 @@ public interface Operator {
    * it will match "4" as well as "Resolved".
    * (Note: This operator can be used with the Assignee, Fix Version, Priority,  Reporter, Resolution and Status fields only.)
    */
-  Predicate was(Object value);
+  JQLPredicate was(Object value);
 
   /**
    * The "WAS IN" operator is used to find issues that currently have, or previously had, any of multiple specified values
@@ -179,7 +179,7 @@ public interface Operator {
    * match "4" as well as "Resolved".
    * (Note: This operator can be used with the Assignee, Fix Version, Priority,  Reporter, Resolution and Status fields only.)
    */
-  Predicate wasIn(Object... values);
+  JQLPredicate wasIn(Object... values);
 
   /**
    * The "WAS NOT IN" operator is used to search for issues where the value of the specified field has never been one of
@@ -200,7 +200,7 @@ public interface Operator {
    * will match "4" as well as "Resolved".
    * (Note: This operator can be used with the Assignee, Fix Version, Priority,  Reporter, Resolution and Status fields only.)
    */
-  Predicate wasNotIn(Object... values);
+  JQLPredicate wasNotIn(Object... values);
 
   /**
    * The "WAS NOT" operator is used to find issues that have never had the specified value for the specified field.
@@ -216,7 +216,7 @@ public interface Operator {
    * it will match "4" as well as "Resolved".
    * (Note: This operator can be used with the Assignee, Fix Version, Priority,  Reporter, Resolution and Status fields only.)
    */
-  Predicate wasNot(Object value);
+  JQLPredicate wasNot(Object value);
 
   /**
    * The "CHANGED" operator is used to find issues that have a value which had changed for the specified field.
@@ -232,7 +232,7 @@ public interface Operator {
    * TO "newvalue"
    * (Note: This operator can be used with the Assignee, Fix Version, Priority, Reporter, Resolution and Status fields only.)
    */
-  Predicate changed();
+  JQLPredicate changed();
 
   /**
    * Used to negate individual clauses or a complex JQL query (a query made up of more than one clause)
@@ -240,5 +240,5 @@ public interface Operator {
    * <p/>
    * (Note: also see NOT EQUALS ("!="), DOES NOT CONTAIN ("!~"), NOT IN and IS NOT.)
    */
-  Operator not();
+  JQLOperator not();
 }

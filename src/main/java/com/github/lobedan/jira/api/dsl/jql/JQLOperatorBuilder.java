@@ -1,12 +1,7 @@
-package com.github.lobedan.jira.api.dsl.builder;
+package com.github.lobedan.jira.api.dsl.jql;
 
-import com.github.lobedan.jira.api.domain.JQL;
-import com.github.lobedan.jira.api.domain.Keyword;
-import com.github.lobedan.jira.api.domain.Operator;
-import com.github.lobedan.jira.api.domain.Predicate;
-import com.github.lobedan.jira.api.domain.Value;
+import com.github.lobedan.jira.api.domain.dsl.jql.*;
 import com.github.lobedan.jira.api.util.StringUtils;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,7 +9,7 @@ import org.apache.logging.log4j.Logger;
  * @author svenklemmer
  * @since jira-api-wrapper 0.1.0
  */
-public class JQLOperatorBuilder implements Operator {
+public class JQLOperatorBuilder implements JQLOperator {
   private static final Logger LOGGER = LogManager.getLogger(JQLOperatorBuilder.class);
 
   private JQL jql;
@@ -23,113 +18,113 @@ public class JQLOperatorBuilder implements Operator {
     jql = aJQL;
   }
 
-  private Keyword addOperatorToKeyword(String field) {
+  private JQLKeyword addOperatorToKeyword(String field) {
     jql.add(field);
     return new JQLKeywordBuilder(jql);
   }
 
-  private Value addOperatorToValue(String field) {
+  private JQLValue addOperatorToValue(String field) {
     jql.add(field);
     return new JQLValueBuilder(jql);
   }
 
-  private Predicate addOperatorToPredicate(String field) {
+  private JQLPredicate addOperatorToPredicate(String field) {
     jql.add(field);
     return new JQLPredicateBuilder(jql);
   }
 
-  private Operator addOperator(String field) {
+  private JQLOperator addOperator(String field) {
     jql.add(field);
     return this;
   }
 
   @Override
-  public Keyword equal(Object value) {
+  public JQLKeyword equal(Object value) {
     return addOperatorToKeyword(" = " + StringUtils.stringify(value));
   }
 
   @Override
-  public Keyword notEquals(Object value) {
+  public JQLKeyword notEquals(Object value) {
     return addOperatorToKeyword(" != " + StringUtils.stringify(value));
   }
 
   @Override
-  public Keyword greaterThan(Object value) {
+  public JQLKeyword greaterThan(Object value) {
     return addOperatorToKeyword(" > " + StringUtils.stringify(value));
   }
 
   @Override
-  public Keyword greaterThanEquals(Object value) {
+  public JQLKeyword greaterThanEquals(Object value) {
     return addOperatorToKeyword(" >= " + StringUtils.stringify(value));
   }
 
   @Override
-  public Keyword lessThan(Object value) {
+  public JQLKeyword lessThan(Object value) {
     return addOperatorToKeyword(" < " + StringUtils.stringify(value));
   }
 
   @Override
-  public Keyword lessThanEquals(Object value) {
+  public JQLKeyword lessThanEquals(Object value) {
     return addOperatorToKeyword(" <= " + StringUtils.stringify(value));
   }
 
   @Override
-  public Keyword in(Object... values) {
+  public JQLKeyword in(Object... values) {
     return addOperatorToKeyword(" in (" + StringUtils.commaSeparatedList(values) + ")");
   }
 
   @Override
-  public Keyword notIn(Object... values) {
+  public JQLKeyword notIn(Object... values) {
     return addOperatorToKeyword(" not in (" + StringUtils.commaSeparatedList(values) + ")");
   }
 
   @Override
-  public Keyword contains(String value) {
+  public JQLKeyword contains(String value) {
     return addOperatorToKeyword(" ~ " + value);
   }
 
   @Override
-  public Keyword doesNotContain(String value) {
+  public JQLKeyword doesNotContain(String value) {
     return addOperatorToKeyword(" !~ " + value);
   }
 
   @Override
-  public Value is() {
+  public JQLValue is() {
     return addOperatorToValue(" is");
   }
 
   @Override
-  public Value isNot() {
+  public JQLValue isNot() {
     return addOperatorToValue(" is not");
   }
 
   @Override
-  public Predicate was(Object value) {
+  public JQLPredicate was(Object value) {
     return addOperatorToPredicate(" was " + StringUtils.stringify(value));
   }
 
   @Override
-  public Predicate wasIn(Object... values) {
+  public JQLPredicate wasIn(Object... values) {
     return addOperatorToPredicate(" was in (" + StringUtils.commaSeparatedList(values) + ")");
   }
 
   @Override
-  public Predicate wasNotIn(Object... values) {
+  public JQLPredicate wasNotIn(Object... values) {
     return addOperatorToPredicate(" was not in (" + StringUtils.commaSeparatedList(values) + ")");
   }
 
   @Override
-  public Predicate wasNot(Object value) {
+  public JQLPredicate wasNot(Object value) {
     return addOperatorToPredicate(" was not " + StringUtils.stringify(value));
   }
 
   @Override
-  public Predicate changed() {
+  public JQLPredicate changed() {
     return addOperatorToPredicate(" CHANGED");
   }
 
   @Override
-  public Operator not() {
+  public JQLOperator not() {
     return addOperator(" not");
   }
 }

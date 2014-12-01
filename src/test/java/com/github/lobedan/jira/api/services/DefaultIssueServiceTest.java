@@ -8,11 +8,8 @@
  */
 package com.github.lobedan.jira.api.services;
 
-import java.net.URISyntaxException;
-
 import com.github.lobedan.jira.api.domain.jira.Issue;
 import com.github.lobedan.jira.api.types.SchemeType;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
@@ -22,7 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static com.github.lobedan.jira.api.builder.JiraUrlBuilder.jiraUrl;
+import java.net.URISyntaxException;
+
+import static com.github.lobedan.jira.api.dsl.jiraurl.JiraUrlBuilder.jiraUrl;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;

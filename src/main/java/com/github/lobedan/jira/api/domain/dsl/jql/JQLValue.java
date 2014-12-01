@@ -1,10 +1,10 @@
-package com.github.lobedan.jira.api.domain;
+package com.github.lobedan.jira.api.domain.dsl.jql;
 
 /**
  * @author svenklemmer
  * @since jira-api-wrapper 0.1.0
  */
-public interface Value {
+public interface JQLValue {
   /**
    * Used to search for issues where a given field does not have a value.
    *
@@ -13,7 +13,7 @@ public interface Value {
    * Note that EMPTY can only be used with fields that support the IS and IS NOT operators.
    * To see a field's supported operators, check the individual field reference.
    */
-  Predicate empty();
+  JQLPredicate empty();
 
   /**
    * Used to search for issues where a given field does not have a value.
@@ -25,5 +25,5 @@ public interface Value {
    * <p/>
    * named nul because java does not allow null as method name
    */
-  Predicate nul();
+  JQLPredicate nul();
 }

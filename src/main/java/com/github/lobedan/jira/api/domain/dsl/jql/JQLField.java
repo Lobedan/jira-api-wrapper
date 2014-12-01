@@ -1,4 +1,4 @@
-package com.github.lobedan.jira.api.domain;
+package com.github.lobedan.jira.api.domain.dsl.jql;
 
 /**
  * A field in JQL is a word that represents a JIRA field (or a custom field that has already been defined in JIRA).
@@ -9,7 +9,7 @@ package com.github.lobedan.jira.api.domain;
  * @author svenklemmer
  * @since jira-api-wrapper 0.1.0
  */
-public interface Field {
+public interface JQLField {
 
   /**
    * Search for issues that are assigned to a particular Affects Version(s). You can search by version name or version ID
@@ -23,20 +23,20 @@ public interface Field {
    * <p/>
    * Supported Operators
    *
-   * @see Operator#equal(Object)  =
-   * @see Operator#notEquals(Object) !=
-   * @see Operator#greaterThan(Object) () >
-   * @see Operator#greaterThanEquals(Object) () >=
-   * @see Operator#lessThan(Object) ()  <
-   * @see Operator#lessThanEquals(Object) () <=
-   * @see Operator#is() IS
-   * @see Operator#isNot() IS NOT
-   * @see Operator#in(Object...) () IN
-   * @see Operator#notIn(Object...) () NOT IN
+   * @see JQLOperator#equal(Object)  =
+   * @see JQLOperator#notEquals(Object) !=
+   * @see JQLOperator#greaterThan(Object) () >
+   * @see JQLOperator#greaterThanEquals(Object) () >=
+   * @see JQLOperator#lessThan(Object) ()  <
+   * @see JQLOperator#lessThanEquals(Object) () <=
+   * @see JQLOperator#is() IS
+   * @see JQLOperator#isNot() IS NOT
+   * @see JQLOperator#in(Object...) () IN
+   * @see JQLOperator#notIn(Object...) () NOT IN
    * <p/>
    * Note that the comparison operators (e.g. ">") use the version order that has been set up by your project administrator, not a numeric or alphabetic order.
    */
-  Operator affectedVersion();
+  JQLOperator affectedVersion();
 
   /**
    * Search for issues that are assigned to a particular user. You can search by the user's Full Name, ID or Email Address.
@@ -44,42 +44,42 @@ public interface Field {
    * <p/>
    * Supported Operators
    *
-   * @see Operator#equal(Object) =
-   * @see Operator#notEquals(Object) !=
-   * @see Operator#was(Object) () WAS
-   * @see Operator#wasIn(Object...) () WAS IN
-   * @see Operator#wasNot(Object) () WAS NOT
-   * @see Operator#wasNotIn(Object...) () WAS NOT IN
-   * @see Operator#changed() CHANGED
+   * @see JQLOperator#equal(Object) =
+   * @see JQLOperator#notEquals(Object) !=
+   * @see JQLOperator#was(Object) () WAS
+   * @see JQLOperator#wasIn(Object...) () WAS IN
+   * @see JQLOperator#wasNot(Object) () WAS NOT
+   * @see JQLOperator#wasNotIn(Object...) () WAS NOT IN
+   * @see JQLOperator#changed() CHANGED
    */
-  Operator assignee();
+  JQLOperator assignee();
 
   /**
    * Search for issues which have or do not have attachments. You can only use the EMPTY or IS NOT EMPTY operators for this field.
    *
-   * @see Value#empty()
-   * @see Operator#not()
+   * @see JQLValue#empty()
+   * @see JQLOperator#not()
    * <p/>
    * <p/>
    * Supported Operators
-   * @see Operator#is()
-   * @see Operator#isNot()
+   * @see JQLOperator#is()
+   * @see JQLOperator#isNot()
    */
-  Operator attachments();
+  JQLOperator attachments();
 
   /**
    * Search for issues that belong to projects in a particular Category.
    * <p/>
    * Supported Operators
    *
-   * @see Operator#equal(Object) =
-   * @see Operator#notEquals(Object) !=
-   * @see Operator#is() IS
-   * @see Operator#isNot() IS NOT
-   * @see Operator#in(Object...) () IN
-   * @see Operator#notIn(Object...) () NOT IN
+   * @see JQLOperator#equal(Object) =
+   * @see JQLOperator#notEquals(Object) !=
+   * @see JQLOperator#is() IS
+   * @see JQLOperator#isNot() IS NOT
+   * @see JQLOperator#in(Object...) () IN
+   * @see JQLOperator#notIn(Object...) () NOT IN
    */
-  Operator category();
+  JQLOperator category();
 
   /**
    * Search for issues that have a Comment which contains particular text.
@@ -87,10 +87,10 @@ public interface Field {
    * <p/>
    * Supported Operators
    *
-   * @see Operator#contains(String) ()
-   * @see Operator#doesNotContain(String) ()
+   * @see JQLOperator#contains(String) ()
+   * @see JQLOperator#doesNotContain(String) ()
    */
-  Operator comment();
+  JQLOperator comment();
 
   /**
    * Search for issues that belong to a particular component(s) of a project. You can search by component name or
@@ -104,14 +104,14 @@ public interface Field {
    * <p/>
    * Supported Operators
    *
-   * @see Operator#equal(Object) =
-   * @see Operator#notEquals(Object) !=
-   * @see Operator#is() IS
-   * @see Operator#isNot() IS NOT
-   * @see Operator#in(Object...) IN
-   * @see Operator#notIn(Object...) NOT IN
+   * @see JQLOperator#equal(Object) =
+   * @see JQLOperator#notEquals(Object) !=
+   * @see JQLOperator#is() IS
+   * @see JQLOperator#isNot() IS NOT
+   * @see JQLOperator#in(Object...) IN
+   * @see JQLOperator#notIn(Object...) NOT IN
    */
-  Operator component();
+  JQLOperator component();
 
   /**
    * Search for issues that were created on, before or after a particular date (or date range). Note that if a
@@ -133,226 +133,226 @@ public interface Field {
    * @see #createdDate()
    * <p/>
    * Supported Operators
-   * @see Operator#equal(Object) =
-   * @see Operator#notEquals(Object) !=
-   * @see Operator#greaterThan(Object) >
-   * @see Operator#greaterThanEquals(Object) () >=
-   * @see Operator#lessThan(Object) ()  <
-   * @see Operator#lessThanEquals(Object) () <=
-   * @see Operator#is() IS
-   * @see Operator#isNot() IS NOT
-   * @see Operator#in(Object...) () IN
-   * @see Operator#notIn(Object...) () NOT IN
+   * @see JQLOperator#equal(Object) =
+   * @see JQLOperator#notEquals(Object) !=
+   * @see JQLOperator#greaterThan(Object) >
+   * @see JQLOperator#greaterThanEquals(Object) () >=
+   * @see JQLOperator#lessThan(Object) ()  <
+   * @see JQLOperator#lessThanEquals(Object) () <=
+   * @see JQLOperator#is() IS
+   * @see JQLOperator#isNot() IS NOT
+   * @see JQLOperator#in(Object...) () IN
+   * @see JQLOperator#notIn(Object...) () NOT IN
    */
-  Operator created();
+  JQLOperator created();
 
   /**
    * @see #created()
    */
-  Operator createdDate();
+  JQLOperator createdDate();
 
   /**
    *
    */
-  Operator creator();
+  JQLOperator creator();
 
   /**
    *
    */
-  Operator customField(String fieldName);
+  JQLOperator customField(String fieldName);
 
   /**
    *
    */
-  Operator description();
+  JQLOperator description();
 
   /**
    *
    */
-  Operator due();
+  JQLOperator due();
 
   /**
    * @see #due()
    */
-  Operator dueDate();
+  JQLOperator dueDate();
 
   /**
    *
    */
-  Operator environment();
+  JQLOperator environment();
 
   /**
    *
    */
-  Operator epicLink();
+  JQLOperator epicLink();
 
   /**
    *
    */
-  Operator filter();
+  JQLOperator filter();
 
   /**
    *
    */
-  Operator fixVersion();
+  JQLOperator fixVersion();
 
   /**
    * @see #issueKey()
    */
-  Operator id();
+  JQLOperator id();
 
   /**
    * @see #issueKey()
    */
-  Operator issue();
+  JQLOperator issue();
 
   /**
    *
    */
-  Operator issueKey();
+  JQLOperator issueKey();
 
   /**
    * @see #issueKey()
    */
-  Operator key();
+  JQLOperator key();
 
   /**
    *
    */
-  Operator lastViewed();
+  JQLOperator lastViewed();
 
   /**
    *
    */
-  Operator level();
+  JQLOperator level();
 
   /**
    *
    */
-  Operator originalEstimate();
+  JQLOperator originalEstimate();
 
   /**
    *
    */
-  Operator parent();
+  JQLOperator parent();
 
   /**
    *
    */
-  Operator priority();
+  JQLOperator priority();
 
   /**
    *
    */
-  Operator project();
+  JQLOperator project();
 
   /**
    *
    */
-  Operator remainingEstimate();
+  JQLOperator remainingEstimate();
 
   /**
    *
    */
-  Operator reporter();
+  JQLOperator reporter();
 
   /**
    * @see #filter()
    */
-  Operator request();
+  JQLOperator request();
 
   /**
    * @see #resolved()
    */
-  Operator resolutionDate();
+  JQLOperator resolutionDate();
 
   /**
    *
    */
-  Operator resolution();
+  JQLOperator resolution();
 
   /**
    *
    */
-  Operator resolved();
+  JQLOperator resolved();
 
   /**
    * @see #filter()
    */
-  Operator savedFilter();
+  JQLOperator savedFilter();
 
   /**
    * @see #filter()
    */
-  Operator searchRequest();
+  JQLOperator searchRequest();
 
   /**
    *
    */
-  Operator sprint();
+  JQLOperator sprint();
 
   /**
    *
    */
-  Operator status();
+  JQLOperator status();
 
   /**
    *
    */
-  Operator summary();
+  JQLOperator summary();
 
   /**
    *
    */
-  Operator text();
+  JQLOperator text();
 
   /**
    * @see #remainingEstimate()
    */
-  Operator timeEstimate();
+  JQLOperator timeEstimate();
 
   /**
    *
    */
-  Operator timeOriginalEstimate();
+  JQLOperator timeOriginalEstimate();
 
   /**
    *
    */
-  Operator type();
+  JQLOperator type();
 
   /**
    *
    */
-  Operator timeSpent();
+  JQLOperator timeSpent();
 
   /**
    *
    */
-  Operator updated();
+  JQLOperator updated();
 
   /**
    *
    */
-  Operator voter();
+  JQLOperator voter();
 
   /**
    *
    */
-  Operator votes();
+  JQLOperator votes();
 
   /**
    *
    */
-  Operator watcher();
+  JQLOperator watcher();
 
   /**
    *
    */
-  Operator watchers();
+  JQLOperator watchers();
 
   /**
    *
    */
-  Operator workRatio();
+  JQLOperator workRatio();
 }

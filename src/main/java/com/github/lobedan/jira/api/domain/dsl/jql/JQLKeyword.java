@@ -1,4 +1,4 @@
-package com.github.lobedan.jira.api.domain;
+package com.github.lobedan.jira.api.domain.dsl.jql;
 
 /**
  * A keyword in JQL is a word or phrase that does (or is) any of the following:
@@ -12,14 +12,14 @@ package com.github.lobedan.jira.api.domain;
  * @author svenklemmer
  * @since jira-api-wrapper 0.1.0
  */
-public interface Keyword {
+public interface JQLKeyword {
 
   /**
    * Used to combine multiple clauses, allowing you to refine your search.
    * <p/>
    * Note that you can use parentheses to control the order in which clauses are executed.
    */
-  Field and();
+  JQLField and();
 
   /**
    * Used to combine multiple clauses, allowing you to expand your search.
@@ -28,7 +28,7 @@ public interface Keyword {
    * <p/>
    * (Note: also see IN, which can be a more convenient way to search for multiple values of a field.)
    */
-  Field or();
+  JQLField or();
 
   /**
    * Used to specify the fields by whose values the search results will be sorted.
@@ -38,7 +38,7 @@ public interface Keyword {
    *
    * @see com.github.lobedan.jira.api.types.OrderType
    */
-  Order orderBy(String... fieldNames);
+  JQLOrder orderBy(String... fieldNames);
 
   /**
    * returns jql query as string

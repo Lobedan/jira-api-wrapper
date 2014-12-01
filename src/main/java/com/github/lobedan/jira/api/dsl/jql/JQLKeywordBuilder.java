@@ -1,11 +1,10 @@
-package com.github.lobedan.jira.api.dsl.builder;
+package com.github.lobedan.jira.api.dsl.jql;
 
-import com.github.lobedan.jira.api.domain.Field;
-import com.github.lobedan.jira.api.domain.JQL;
-import com.github.lobedan.jira.api.domain.Keyword;
-import com.github.lobedan.jira.api.domain.Order;
+import com.github.lobedan.jira.api.domain.dsl.jql.JQL;
+import com.github.lobedan.jira.api.domain.dsl.jql.JQLField;
+import com.github.lobedan.jira.api.domain.dsl.jql.JQLKeyword;
+import com.github.lobedan.jira.api.domain.dsl.jql.JQLOrder;
 import com.github.lobedan.jira.api.util.StringUtils;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,7 +12,7 @@ import org.apache.logging.log4j.Logger;
  * @author svenklemmer
  * @since jira-api-wrapper 0.1.0
  */
-public class JQLKeywordBuilder implements Keyword {
+public class JQLKeywordBuilder implements JQLKeyword {
   private static final Logger LOGGER = LogManager.getLogger(JQLKeywordBuilder.class);
 
   private JQL jql;
@@ -22,28 +21,28 @@ public class JQLKeywordBuilder implements Keyword {
     jql = aJQL;
   }
 
-  private Field addKeywordToField(String field) {
+  private JQLField addKeywordToField(String field) {
     jql.add(field);
     return new JQLFieldBuilder(jql);
   }
 
-  private Order addKeywordToOrder(String field) {
+  private JQLOrder addKeywordToOrder(String field) {
     jql.add(field);
     return new JQLOrderBuilder(jql);
   }
 
   @Override
-  public Field and() {
+  public JQLField and() {
     return addKeywordToField(" AND ");
   }
 
   @Override
-  public Field or() {
+  public JQLField or() {
     return addKeywordToField(" OR ");
   }
 
   @Override
-  public Order orderBy(String... fieldNames) {
+  public JQLOrder orderBy(String... fieldNames) {
     return addKeywordToOrder(" order by " + StringUtils.commaSeparatedList(fieldNames));
   }
 

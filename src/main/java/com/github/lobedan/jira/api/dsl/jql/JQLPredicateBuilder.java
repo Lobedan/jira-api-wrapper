@@ -1,21 +1,20 @@
-package com.github.lobedan.jira.api.dsl.builder;
+package com.github.lobedan.jira.api.dsl.jql;
 
-import java.util.Date;
-
-import com.github.lobedan.jira.api.domain.Field;
-import com.github.lobedan.jira.api.domain.JQL;
-import com.github.lobedan.jira.api.domain.Order;
-import com.github.lobedan.jira.api.domain.Predicate;
+import com.github.lobedan.jira.api.domain.dsl.jql.JQL;
+import com.github.lobedan.jira.api.domain.dsl.jql.JQLField;
+import com.github.lobedan.jira.api.domain.dsl.jql.JQLOrder;
+import com.github.lobedan.jira.api.domain.dsl.jql.JQLPredicate;
 import com.github.lobedan.jira.api.util.StringUtils;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Date;
 
 /**
  * @author svenklemmer
  * @since jira-api-wrapper 0.1.0
  */
-public class JQLPredicateBuilder implements Predicate {
+public class JQLPredicateBuilder implements JQLPredicate {
   private static final Logger LOGGER = LogManager.getLogger(JQLPredicateBuilder.class);
 
   private JQL jql;
@@ -24,88 +23,88 @@ public class JQLPredicateBuilder implements Predicate {
     this.jql = aJQL;
   }
 
-  private Predicate addPredicate(String field) {
+  private JQLPredicate addPredicate(String field) {
     jql.add(field);
     return this;
   }
 
-  private Field addPredicateToField(String field) {
+  private JQLField addPredicateToField(String field) {
     jql.add(field);
     return new JQLFieldBuilder(jql);
   }
 
-  private Order addPredicateToOrder(String field) {
+  private JQLOrder addPredicateToOrder(String field) {
     jql.add(field);
     return new JQLOrderBuilder(jql);
   }
 
   @Override
-  public Predicate after(String date) {
+  public JQLPredicate after(String date) {
     return addPredicate(" after " + date);
   }
 
   @Override
-  public Predicate after(Date aDate) {
+  public JQLPredicate after(Date aDate) {
     return after(StringUtils.dateToString(aDate));
   }
 
   @Override
-  public Predicate before(String date) {
+  public JQLPredicate before(String date) {
     return addPredicate(" before " + date);
   }
 
   @Override
-  public Predicate before(Date date) {
+  public JQLPredicate before(Date date) {
     return after(StringUtils.dateToString(date));
   }
 
   @Override
-  public Predicate by(String username) {
+  public JQLPredicate by(String username) {
     return addPredicate(" BY " + username);
   }
 
   @Override
-  public Predicate during(String date1, String date2) {
+  public JQLPredicate during(String date1, String date2) {
     return addPredicate(" DURING (" + date1 + ", " + date2 + ")");
   }
 
   @Override
-  public Predicate during(Date date1, Date date2) {
+  public JQLPredicate during(Date date1, Date date2) {
     return during(StringUtils.dateToString(date1), StringUtils.dateToString(date2));
   }
 
   @Override
-  public Predicate on(String date) {
+  public JQLPredicate on(String date) {
     return addPredicate(" ON " + date);
   }
 
   @Override
-  public Predicate on(Date aDate) {
+  public JQLPredicate on(Date aDate) {
     return on(StringUtils.dateToString(aDate));
   }
 
   @Override
-  public Predicate from(Object value) {
+  public JQLPredicate from(Object value) {
     return addPredicate(" FROM " + StringUtils.stringify(value));
   }
 
   @Override
-  public Predicate to(Object value) {
+  public JQLPredicate to(Object value) {
     return addPredicate(" TO " + StringUtils.stringify(value));
   }
 
   @Override
-  public Field and() {
+  public JQLField and() {
     return addPredicateToField(" AND ");
   }
 
   @Override
-  public Field or() {
+  public JQLField or() {
     return addPredicateToField(" OR ");
   }
 
   @Override
-  public Order orderBy(String... fieldNames) {
+  public JQLOrder orderBy(String... fieldNames) {
     return addPredicateToOrder(" order by " + StringUtils.commaSeparatedList(fieldNames));
   }
 

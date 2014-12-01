@@ -1,4 +1,4 @@
-package com.github.lobedan.jira.api.domain;
+package com.github.lobedan.jira.api.domain.dsl.jql;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

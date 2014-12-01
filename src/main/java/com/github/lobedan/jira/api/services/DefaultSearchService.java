@@ -8,10 +8,9 @@
  */
 package com.github.lobedan.jira.api.services;
 
-import com.github.lobedan.jira.api.builder.JiraUrlBuilder;
 import com.github.lobedan.jira.api.domain.jira.Search;
+import com.github.lobedan.jira.api.dsl.jiraurl.JiraUrlBuilder;
 import com.github.lobedan.jira.api.exceptions.NoIssuesFoundException;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -20,3 +20,4 @@
 ** *Support Field aliases* see https://confluence.atlassian.com/display/JIRA/Advanced+Searching#AdvancedSearching-Filter
 ** *Support concrete date values*
 ** *CRUD operations for issues
+** *Support custom fields in JiraUrl-DSL fields filter
