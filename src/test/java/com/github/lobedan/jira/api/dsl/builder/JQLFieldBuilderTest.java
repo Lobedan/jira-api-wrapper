@@ -377,4 +377,144 @@ public class JQLFieldBuilderTest {
         is("resolved is empty")
     );
   }
+
+    @Test
+    public void testSprintField() throws Exception {
+        assertThat(
+                jql()
+                        .sprint().is().empty()
+                        .build(),
+                is("sprint is empty")
+        );
+    }
+
+    @Test
+    public void testStatusField() throws Exception {
+        assertThat(
+                jql()
+                        .status().is().empty()
+                        .build(),
+                is("status is empty")
+        );
+    }
+
+    @Test
+    public void testSummaryField() throws Exception {
+        assertThat(
+                jql()
+                        .summary().is().empty()
+                        .build(),
+                is("summary is empty")
+        );
+    }
+
+    @Test
+    public void testTextField() throws Exception {
+        assertThat(
+                jql()
+                        .text().is().empty()
+                        .build(),
+                is("text is empty")
+        );
+    }
+
+    @Test
+    public void testTypeField() throws Exception {
+        assertThat(
+                jql()
+                        .type().is().empty()
+                        .build(),
+                is("type is empty")
+        );
+    }
+
+    @Test
+    public void testIssueTypeField() throws Exception {
+        assertThat(
+                jql()
+                        .issueType().is().empty()
+                        .build(),
+                is("issueType is empty")
+        );
+    }
+
+    @Test
+    public void testTimeSpentField() throws Exception {
+        assertThat(
+                jql()
+                        .timeSpent().is().empty()
+                        .build(),
+                is("timeSpent is empty")
+        );
+    }
+
+    @Test
+    public void testUpdatedField() throws Exception {
+        assertThat(
+                jql()
+                        .updated().is().empty()
+                        .build(),
+                is("updated is empty")
+        );
+    }
+
+    @Test
+    public void testUpdatedDateField() throws Exception {
+        assertThat(
+                jql()
+                        .updatedDate().is().empty()
+                        .build(),
+                is("updatedDate is empty")
+        );
+    }
+
+    @Test
+    public void testVoterField() throws Exception {
+        assertThat(
+                jql()
+                        .voter().is().empty()
+                        .build(),
+                is("voter is empty")
+        );
+    }
+
+    @Test
+    public void testVotesField() throws Exception {
+        assertThat(
+                jql()
+                        .votes().is().empty()
+                        .build(),
+                is("votes is empty")
+        );
+    }
+
+    @Test
+    public void testWatcherField() throws Exception {
+        assertThat(
+                jql()
+                        .watcher().is().empty()
+                        .build(),
+                is("watcher is empty")
+        );
+    }
+
+    @Test
+    public void testWatchersField() throws Exception {
+        assertThat(
+                jql()
+                        .watchers().is().empty()
+                        .build(),
+                is("watchers is empty")
+        );
+    }
+
+    @Test
+    public void testWorkRatioField() throws Exception {
+        assertThat(
+                jql()
+                        .workRatio().is().empty()
+                        .build(),
+                is("workRatio is empty")
+        );
+    }
 }

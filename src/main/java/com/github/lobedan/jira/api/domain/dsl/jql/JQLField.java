@@ -212,6 +212,11 @@ public interface JQLField {
   JQLOperator issueKey();
 
   /**
+   * @see #type()
+   */
+  JQLOperator issueType();
+
+  /**
    * @see #issueKey()
    */
   JQLOperator key();
@@ -330,6 +335,11 @@ public interface JQLField {
    *
    */
   JQLOperator updated();
+
+  /**
+   * @see #updated()
+   */
+  JQLOperator updatedDate();
 
   /**
    *

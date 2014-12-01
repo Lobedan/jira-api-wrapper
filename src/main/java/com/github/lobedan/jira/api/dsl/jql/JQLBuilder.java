@@ -7,10 +7,7 @@ import com.github.lobedan.jira.api.domain.dsl.jql.JQL;
  * @since jira-api-wrapper 0.1.0
  */
 public class JQLBuilder {
-  private static JQL jql;
-
   public static JQLFieldBuilder jql() {
-    jql = new JQL();
-    return new JQLFieldBuilder(jql);
+    return new JQLFieldBuilder(new JQL());
   }
 }

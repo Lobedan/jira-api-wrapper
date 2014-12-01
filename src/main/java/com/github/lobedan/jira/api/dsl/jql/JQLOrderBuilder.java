@@ -2,6 +2,8 @@ package com.github.lobedan.jira.api.dsl.jql;
 
 import com.github.lobedan.jira.api.domain.dsl.jql.JQL;
 import com.github.lobedan.jira.api.domain.dsl.jql.JQLOrder;
+import com.github.lobedan.jira.api.types.OrderType;
+import com.github.lobedan.jira.api.util.StringUtils;
 
 /**
  * @author svenklemmer
@@ -16,11 +18,11 @@ public class JQLOrderBuilder implements JQLOrder {
 
   @Override
   public void asc() {
-    jql.add(" asc");
+    jql.add(" " + StringUtils.stringify(OrderType.ASC));
   }
 
   @Override
   public void desc() {
-    jql.add(" desc");
+    jql.add(" " + StringUtils.stringify(OrderType.DESC));
   }
 }

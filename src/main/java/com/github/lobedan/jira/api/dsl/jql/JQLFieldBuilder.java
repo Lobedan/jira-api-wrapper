@@ -125,6 +125,11 @@ public class JQLFieldBuilder implements JQLField {
   }
 
   @Override
+  public JQLOperator issueType() {
+    return addField("issueType");
+  }
+
+  @Override
   public JQLOperator key() {
     return addField("key");
   }
@@ -218,6 +223,7 @@ public class JQLFieldBuilder implements JQLField {
   public JQLOperator text() {
     return addField("text");
   }
+
   @Override
   public JQLOperator timeEstimate() {
     return addField("timeEstimate");
@@ -241,6 +247,11 @@ public class JQLFieldBuilder implements JQLField {
   @Override
   public JQLOperator updated() {
     return addField("updated");
+  }
+
+  @Override
+  public JQLOperator updatedDate() {
+    return addField("updatedDate");
   }
 
   @Override
