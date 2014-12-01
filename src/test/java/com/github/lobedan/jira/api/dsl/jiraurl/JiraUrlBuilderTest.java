@@ -1,4 +1,4 @@
-package com.github.lobedan.jira.api.builder;
+package com.github.lobedan.jira.api.dsl.jiraurl;
 
 import com.github.lobedan.jira.api.types.ExpandType;
 import com.github.lobedan.jira.api.types.FieldType;

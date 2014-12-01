@@ -1,4 +1,4 @@
-package com.github.lobedan.jira.api.dsl.builder;
+package com.github.lobedan.jira.api.dsl.jql;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
