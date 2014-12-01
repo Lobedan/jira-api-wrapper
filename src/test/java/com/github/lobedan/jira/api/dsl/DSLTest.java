@@ -1,7 +1,6 @@
 package com.github.lobedan.jira.api.dsl;
 
 import com.github.lobedan.jira.api.domain.JQL;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -55,5 +54,16 @@ public class DSLTest {
             .andReturn(),
         is(instanceOf(JQL.class))
     );
+
+      assertThat(
+              jql()
+                      .assignee().is().empty()
+                      .and()
+                      .affectedVersion().greaterThan(2)
+                      .or()
+                      .fixVersion().greaterThan(4)
+                      .andReturn(),
+              is(instanceOf(JQL.class))
+      );
   }
 }
