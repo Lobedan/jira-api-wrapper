@@ -8,16 +8,22 @@
  */
 package com.github.lobedan.jira.api.services;
 
+import java.net.URISyntaxException;
+
 import com.github.lobedan.jira.api.domain.jira.Search;
+import com.github.lobedan.jira.api.dsl.jiraurl.JiraUrlBuilder;
 import com.github.lobedan.jira.api.types.SchemeType;
+
+import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.net.URISyntaxException;
 
 import static com.github.lobedan.jira.api.dsl.jiraurl.JiraUrlBuilder.jiraUrl;
 import static org.hamcrest.CoreMatchers.is;
@@ -32,28 +38,32 @@ public class DefaultSearchServiceTest {
 
   @Autowired
   private DefaultSearchService service;
-  private DefaultSearchService spy;
+  private HttpRestTemplate spy;
+
+  private JiraUrlBuilder jiraUrlBuilder;
 
   @Before
   public void setup() throws URISyntaxException {
-    service.setBaseUrlBuilder(
-        jiraUrl()
-            .scheme(SchemeType.HTTP)
-            .host("example.com")
-            .path("")
-            .apiVersion("latest")
-    );
-    spy = spy(service);
+    jiraUrlBuilder = jiraUrl()
+        .scheme(SchemeType.HTTP)
+        .host("example.com");
+
+    spy = spy(new HttpRestTemplate(new UsernamePasswordCredentials("test", "test")));
+    service.setHttpRestTemplate(spy);
+    service.setBaseUrlBuilder(jiraUrlBuilder);
   }
 
   @Test
-  public void testCanGetIssueByKey() throws Exception {
-    assertThat(spy.getBaseUrlBuilder().build().toString(),
-            is("http://example.com/rest/api/latest/"));
+  public void testCanSearchJiraInstance() throws Exception {
+    assertThat(jiraUrlBuilder.build().toString(), is("http://example.com:80//rest/api/latest/"));
 
     Search testObject = new Search();
     testObject.setTotal(1);
-    doReturn(testObject).when(spy).searchForIssues(service.getBaseUrlBuilder());
+    ResponseEntity<Search> testResponse = new ResponseEntity<Search>(testObject, HttpStatus.OK);
+
+    doReturn(testResponse).when(spy).exchange(jiraUrlBuilder.build().toString() + "/search?jql=",
+                                              HttpMethod.GET,
+                                              Search.class);
 
     assertThat(testObject, is(notNullValue()));
     assertThat(testObject.getTotal(), is(1));

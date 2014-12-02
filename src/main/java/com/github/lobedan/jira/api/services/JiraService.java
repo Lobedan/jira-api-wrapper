@@ -1,5 +1,7 @@
 package com.github.lobedan.jira.api.services;
 
+import com.github.lobedan.jira.api.domain.aware.JiraUrlAware;
+
 /**
  * this is the main class of jira-api-wrapper it provides basic must have
  * methods for all services

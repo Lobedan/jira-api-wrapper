@@ -1,4 +1,4 @@
-package com.github.lobedan.jira.api.services;
+package com.github.lobedan.jira.api.domain.aware;
 
 
 import com.github.lobedan.jira.api.dsl.jiraurl.JiraUrlBuilder;

@@ -8,18 +8,25 @@
  */
 package com.github.lobedan.jira.api.services;
 
+import java.net.URISyntaxException;
+
+import com.github.lobedan.jira.api.domain.jira.Fields;
 import com.github.lobedan.jira.api.domain.jira.Issue;
+import com.github.lobedan.jira.api.dsl.jiraurl.JiraUrlBuilder;
 import com.github.lobedan.jira.api.types.SchemeType;
+
+import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.net.URISyntaxException;
 
 import static com.github.lobedan.jira.api.dsl.jiraurl.JiraUrlBuilder.jiraUrl;
 import static org.hamcrest.CoreMatchers.is;
@@ -36,30 +43,69 @@ public class DefaultIssueServiceTest {
 
   @Autowired
   private DefaultIssueService service;
-  private DefaultIssueService spy;
+  private HttpRestTemplate spy;
+
+  private JiraUrlBuilder jiraUrlBuilder;
 
   @Before
   public void setup() throws URISyntaxException {
-    spy = spy(service);
-    spy.setBaseUrlBuilder(
-        jiraUrl()
-            .scheme(SchemeType.HTTP)
-            .host("example.com")
-            .path("")
-            .apiVersion("latest")
-    );
+    jiraUrlBuilder = jiraUrl()
+        .scheme(SchemeType.HTTP)
+        .host("example.com");
+
+
+    spy = spy(new HttpRestTemplate(new UsernamePasswordCredentials("test", "test")));
+    service.setHttpRestTemplate(spy);
+    service.setBaseUrlBuilder(jiraUrlBuilder);
   }
 
   @Test
   public void testCanGetIssueByKey() throws Exception {
-    assertThat(spy.getBaseUrlBuilder().build().toString(), is("http://example.com/rest/api/latest/"));
+    String testKey = "TEST-1234";
+
+    assertThat(jiraUrlBuilder.build().toString(), is("http://example.com:80//rest/api/latest/"));
 
     Issue testObject = new Issue();
-    testObject.setKey("TEST-1234");
-    doReturn(testObject).when(spy).getIssue("TEST-1234");
+    testObject.setKey(testKey);
+
+    ResponseEntity<Issue> testResponse = new ResponseEntity<Issue>(testObject, HttpStatus.OK);
+
+    doReturn(testResponse).when(spy).exchange(jiraUrlBuilder.build().toString() + "/issue/" + testKey,
+                                            HttpMethod.GET,
+                                            Issue.class);
+
+    Issue responseObj = service.getIssue("TEST-1234");
 
     assertThat(testObject, is(notNullValue()));
-    assertThat(testObject.getKey(), is("TEST-1234"));
-  }
+    assertThat(testObject, is(responseObj));
 
+    assertThat(responseObj, is(notNullValue()));
+    assertThat(responseObj.getKey(), is(testKey));
+  }
+  @Test
+  public void testCanUpdateIssueByKey() throws Exception {
+    String testKey = "TEST-1234";
+    String[] testLabels = new String[] { "label1", "label2", "label3" };
+
+    assertThat(jiraUrlBuilder.build().toString(), is("http://example.com:80//rest/api/latest/"));
+
+    Issue testObject = new Issue();
+    testObject.setKey(testKey);
+
+    Fields fields = new Fields();
+    fields.setLabels(testLabels);
+
+    testObject.setFields(fields);
+
+    ResponseEntity<Issue> testResponse = new ResponseEntity<Issue>(testObject, HttpStatus.OK);
+
+    doReturn(testResponse).when(spy).exchange(jiraUrlBuilder.build().toString() + "/issue/" + testKey,
+                                            HttpMethod.GET,
+                                            Issue.class);
+
+    HttpStatus status = service.updateIssue(testKey, testLabels);
+
+    assertThat(testObject, is(notNullValue()));
+    assertThat(status, is(HttpStatus.OK));
+  }
 }

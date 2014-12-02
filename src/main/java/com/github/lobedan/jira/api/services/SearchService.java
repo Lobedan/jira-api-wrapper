@@ -8,10 +8,10 @@
  */
 package com.github.lobedan.jira.api.services;
 
-
+import com.github.lobedan.jira.api.domain.dsl.jql.JQL;
 import com.github.lobedan.jira.api.domain.jira.Search;
-import com.github.lobedan.jira.api.dsl.jiraurl.JiraUrlBuilder;
 
 public interface SearchService extends JiraService {
-  Search searchForIssues(JiraUrlBuilder builder);
+  Search searchForIssues(String jql);
+  Search searchForIssues(JQL jql);
 }

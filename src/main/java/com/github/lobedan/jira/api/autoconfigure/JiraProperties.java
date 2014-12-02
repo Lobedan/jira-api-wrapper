@@ -1,5 +1,6 @@
 package com.github.lobedan.jira.api.autoconfigure;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -77,7 +78,11 @@ public class JiraProperties {
   }
 
   public void setApiPwd(String aApiPwd) {
-    apiPwd = aApiPwd;
+    if (Base64.isArrayByteBase64(apiPwd.getBytes())) {
+      apiPwd = Base64.decodeBase64(apiPwd.getBytes()).toString();
+    } else {
+      apiPwd = aApiPwd;
+    }
   }
 
   @Override

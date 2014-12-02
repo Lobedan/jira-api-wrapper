@@ -3,6 +3,7 @@ package com.github.lobedan.jira.api.autoconfigure;
 import com.github.lobedan.jira.api.dsl.jiraurl.JiraUrlBuilder;
 import com.github.lobedan.jira.api.services.HttpRestTemplate;
 import com.github.lobedan.jira.api.types.SchemeType;
+
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -12,7 +13,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import static com.github.lobedan.jira.api.dsl.jiraurl.JiraUrlBuilder.jiraUrl;
-
 
 /**
  * {@link org.springframework.boot.autoconfigure.EnableAutoConfiguration Auto configuration} for jira support.
@@ -29,11 +29,11 @@ public class JiraAutoConfiguration {
   @Autowired
   private JiraProperties properties;
 
-    @Bean(name = "jiraBaseUrlBuilder")
+  @Bean(name = "jiraBaseUrlBuilder")
   public JiraUrlBuilder jiraBaseUrl() {
 
-   SchemeType schemeType;
-    if (properties.getScheme().contains("https://")) {
+    SchemeType schemeType;
+    if (properties.getScheme().contains("https")) {
       schemeType = SchemeType.HTTPS;
     } else {
       schemeType = SchemeType.HTTP;

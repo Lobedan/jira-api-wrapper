@@ -1,24 +1,17 @@
 ### What needs to be done
-** *Support Jira Functions* like
+- [ ] **Support Jira Functions**
 
-    currentLogin()
-        lastLogin()
-        now()
-        startOfDay()
-        startOfWeek()
-        startOfMonth()
-        startOfYear()
-        endOfDay()
-        endOfWeek()
-        endOfMonth()
-        endOfYear()
-    releasedVersions()
-    latestReleasedVersion()
-    unreleasedVersions()
-    earliestUnreleasedVersion(
+    ````
+    currentLogin(), lastLogin(), now(), startOfDay() startOfWeek(), startOfMonth(), startOfYear(), endOfDay(),
+    endOfWeek(), endOfMonth(), endOfYear(), releasedVersions(), latestReleasedVersion(), unreleasedVersions(),
+    earliestUnreleasedVersion()
+    ````
 
-** *Support Field aliases* see https://confluence.atlassian.com/display/JIRA/Advanced+Searching#AdvancedSearching-Filter
-** *Support concrete date values*
-** *CRUD operations for issues
-** *Support custom fields in JiraUrl-DSL fields filter
-** *Mock HttpRestTemplate in Service Tests to return .json files
+- [x] **Support Field aliases**
+    ````see https://confluence.atlassian.com/display/JIRA/Advanced+Searching#AdvancedSearching-Filter````
+
+- [x] **Support concrete date values**
+
+- [ ] **CRUD operations for issues**
+
+- [ ] **Support custom fields in JiraUrl-DSL fields filter**

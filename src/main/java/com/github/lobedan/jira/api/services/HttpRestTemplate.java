@@ -43,6 +43,13 @@ public class HttpRestTemplate extends RestTemplate {
     return super.exchange(url, method, getRequest(), responseType);
   }
 
+  public <T> ResponseEntity<T> exchange(URI url,
+                                        HttpMethod method,
+                                        Class<T> responseType, String json) throws RestClientException {
+
+    return super.exchange(url, method, getRequest(json), responseType);
+  }
+
   public <T> ResponseEntity<T> exchange(String url,
                                         HttpMethod method,
                                         Class<T> responseType) throws RestClientException {
@@ -50,7 +57,27 @@ public class HttpRestTemplate extends RestTemplate {
     return super.exchange(url, method, getRequest(), responseType);
   }
 
+  public <T> ResponseEntity<T> exchange(String url,
+                                        HttpMethod method,
+                                        Class<T> responseType,
+                                        String json) throws RestClientException {
+
+    return super.exchange(url, method, getRequest(json), responseType);
+  }
+
   private HttpEntity<String> getRequest() {
+    return getRequest(getHeaders());
+  }
+
+  private HttpEntity<String> getRequest(String content) {
+    return new HttpEntity<String>(content, getHeaders());
+  }
+
+  private HttpEntity<String> getRequest(HttpHeaders headers) {
+    return new HttpEntity<String>(headers);
+  }
+
+  private HttpHeaders getHeaders() {
     org.springframework.util.Assert.notNull(credentials);
     HttpHeaders headers = new HttpHeaders();
     String cred = credentials.getUserName() + ":" + credentials.getPassword();
@@ -59,11 +86,7 @@ public class HttpRestTemplate extends RestTemplate {
 
     //adding Authorization header for HTTP Basic authentication
     headers.add("Authorization", "Basic " + base64EncodedToken);
-    return getRequest(headers);
-  }
-
-  private HttpEntity<String> getRequest(HttpHeaders headers) {
-    return new HttpEntity<String>(headers);
+    return headers;
   }
 
   public Credentials getCredentials() {

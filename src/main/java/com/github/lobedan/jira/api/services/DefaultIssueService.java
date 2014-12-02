@@ -1,13 +1,19 @@
 package com.github.lobedan.jira.api.services;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.github.lobedan.jira.api.domain.jira.Issue;
 import com.github.lobedan.jira.api.dsl.jiraurl.JiraUrlBuilder;
 import com.github.lobedan.jira.api.exceptions.IssueNotFoundException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -43,6 +49,53 @@ public class DefaultIssueService implements IssueService, HttpRestTemplateAware 
   }
 
   @Override
+  public HttpStatus updateIssue(long id, String[] newLabels, String[] ownLabels) {
+    return updateIssue("" + id, newLabels, ownLabels);
+  }
+
+  @Override
+  public HttpStatus updateIssue(String key, String[] newLabels, String[] ownLabels) {
+    List<String> updateLabels = new ArrayList<String>(Arrays.asList(newLabels));
+
+    Issue actualIssue = getIssue(key);
+    if (Arrays.equals(actualIssue.getFields().getLabels(), newLabels)) {
+      LOGGER.warn("old Labels and new labels match, there is nothing to update");
+      return HttpStatus.OK;
+    } else {
+      updateLabels = mergeLabels(updateLabels, removeLabels(actualIssue.getFields().getLabels(), ownLabels));
+      return updateIssue(key, updateLabels.toArray(new String[updateLabels.size()]));
+    }
+  }
+
+  @Override
+  public HttpStatus updateIssue(long id, String[] newLabels) {
+    return updateIssue("" + id, newLabels);
+  }
+
+  @Override
+  public HttpStatus updateIssue(String key, String[] newLabels) {
+    String changeJSON = "{"
+                        + "\"update\":"
+                        + "{"
+                        + "\"labels\" : ["
+                        + "{"
+                        + "\"set\" :[";
+    for (String l : newLabels) {
+      changeJSON += "\"" + l + "\",";
+    }
+    changeJSON += "\"\""
+                  + "]"
+                  + "}"
+                  + "]"
+                  + "}"
+                  + "}";
+
+    ResponseEntity<String> responseEntity = restTemplate.exchange(baseUrlBuilder.build().toString() + "/issue/" + key,
+                                                                  HttpMethod.PUT, String.class, changeJSON);
+    return responseEntity.getStatusCode();
+  }
+
+  @Override
   public JiraUrlBuilder getBaseUrlBuilder() {
     return baseUrlBuilder;
   }
@@ -59,5 +112,29 @@ public class DefaultIssueService implements IssueService, HttpRestTemplateAware 
   @Qualifier("defaultHttpRestTemplate")
   public void setHttpRestTemplate(HttpRestTemplate aHttpRestTemplate) {
     this.restTemplate = aHttpRestTemplate;
+  }
+
+  private List<String> mergeLabels(List<String> l1, List<String> l2) {
+    if (l1.size() == 0) {
+      return l2;
+    } else if (l2.size() == 0) {
+      return l1;
+    } else if (l2.size() == 0 && l1.size() == 0) {
+      LOGGER.warn("Both lists are empty return new ArrayList()");
+      return new ArrayList<String>();
+    } else {
+      for (String s1 : l1) {
+        if (!l2.contains(s1)) {
+          l2.add(s1);
+        }
+      }
+      return l2;
+    }
+  }
+
+  private List<String> removeLabels(String[] oldLabels, String[] ownLabels) {
+    List<String> strings = new ArrayList<String>(Arrays.asList(oldLabels));
+    strings.removeAll(Arrays.asList(ownLabels));
+    return strings;
   }
 }

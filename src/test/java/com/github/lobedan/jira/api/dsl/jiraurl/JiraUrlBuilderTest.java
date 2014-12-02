@@ -38,33 +38,29 @@ public class JiraUrlBuilderTest {
         jiraUrl()
             .scheme(SchemeType.HTTPS)
             .host("example.com")
-            .path("")
-            .apiVersion("latest")
             .build()
-            .toString(), is("https://example.com/rest/api/latest/"));
+            .toString(), is("https://example.com:80//rest/api/latest/"));
 
     assertThat(
         jiraUrl()
             .scheme(SchemeType.HTTP)
             .host("example.com")
-            .path("")
-            .apiVersion("latest")
             .startAt(0)
             .maxResults(50)
             .total(100)
             .build()
-            .toString(), is("http://example.com/rest/api/latest/?startat=0&maxresults=50&total=100"));
+            .toString(), is("http://example.com:80//rest/api/latest/?startat=0&maxresults=50&total=100"));
 
     assertThat(
         jiraUrl()
             .scheme(SchemeType.HTTPS)
             .host("example.com")
             .path("jira")
-            .apiVersion("latest")
+            .apiVersion(2)
             .fields(FieldType.ASSIGNEE, FieldType.COMMENT)
             .expand(ExpandType.CHANGELOG)
             .build()
-            .toString(), is("https://example.com/jira/rest/api/latest/?fields=assignee%2Ccomment&expand=changelog"));
+            .toString(), is("https://example.com:80/jira/rest/api/2/?fields=assignee%2Ccomment&expand=changelog"));
   }
 
   @Test

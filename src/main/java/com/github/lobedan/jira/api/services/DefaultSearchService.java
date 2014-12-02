@@ -8,9 +8,11 @@
  */
 package com.github.lobedan.jira.api.services;
 
+import com.github.lobedan.jira.api.domain.dsl.jql.JQL;
 import com.github.lobedan.jira.api.domain.jira.Search;
 import com.github.lobedan.jira.api.dsl.jiraurl.JiraUrlBuilder;
 import com.github.lobedan.jira.api.exceptions.NoIssuesFoundException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,12 +48,17 @@ public class DefaultSearchService implements SearchService, HttpRestTemplateAwar
   }
 
   @Override
-  public Search searchForIssues(JiraUrlBuilder builder) {
-    ResponseEntity<Search> response = restTemplate.exchange(baseUrlBuilder.build().toString(), HttpMethod.GET, Search.class);
+  public Search searchForIssues(String jql) {
+    ResponseEntity<Search> response = restTemplate.exchange(baseUrlBuilder.build().toString() + "/search?jql=" + jql, HttpMethod.GET, Search.class);
     if (response != null) {
       return response.getBody();
     } else {
       throw new NoIssuesFoundException("Could no find any issues");
     }
+  }
+
+  @Override
+  public Search searchForIssues(JQL jql) {
+    return searchForIssues(jql.build());
   }
 }

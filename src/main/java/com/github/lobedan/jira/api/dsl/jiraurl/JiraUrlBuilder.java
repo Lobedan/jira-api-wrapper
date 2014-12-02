@@ -19,103 +19,117 @@ import gumi.builders.UrlBuilder;
  * @since jira-api-wrapper 0.1.0
  */
 public final class JiraUrlBuilder implements JiraUrl {
-    private static final Logger LOGGER = LogManager.getLogger(JiraUrlBuilder.class);
+  private static final Logger LOGGER = LogManager.getLogger(JiraUrlBuilder.class);
 
-    private UrlBuilder urlBuilder;
-    private boolean wasBuild = false;
-    private URI latest;
+  private UrlBuilder urlBuilder;
+  private int port;
+  private String apiVersion;
+  private String path;
 
-    private JiraUrlBuilder() {
-        urlBuilder = UrlBuilder.empty();
+  private JiraUrlBuilder() {
+    urlBuilder = UrlBuilder.empty();
+  }
+
+  public static JiraUrlBuilder jiraUrl() {
+    return new JiraUrlBuilder();
+  }
+
+  @Override
+  public JiraUrlBuilder scheme(SchemeType aType) {
+    urlBuilder = urlBuilder.withScheme(aType.getName());
+    return this;
+  }
+
+  @Override
+  public JiraUrlBuilder host(String host) {
+    urlBuilder = urlBuilder.withHost(host);
+    return this;
+  }
+
+  @Override
+  public JiraUrlBuilder port(int port) {
+    urlBuilder = urlBuilder.withPort(port);
+    this.port = port;
+    return this;
+  }
+
+  @Override
+  public JiraUrlBuilder port(String port) {
+    urlBuilder = urlBuilder.withPort(Integer.parseInt(port));
+    this.port = Integer.parseInt(port);
+    return this;
+  }
+
+  @Override
+  public JiraUrlBuilder path(String aPath) {
+    urlBuilder = urlBuilder.withPath((urlBuilder.path != null ? urlBuilder.path : "") + ((aPath.contains("/") ? aPath : "/" + aPath)));
+    this.path = aPath;
+    return this;
+  }
+
+  @Override
+  public JiraUrlBuilder apiVersion(int version) {
+    return apiVersion("" + version);
+  }
+
+  @Override
+  public JiraUrlBuilder apiVersion(String version) {
+    urlBuilder = urlBuilder.withPath(urlBuilder.path.replace("null", "") + "/rest/api/" + version + "/");
+    this.apiVersion = version;
+    return this;
+  }
+
+  @Override
+  public JiraUrlBuilder jqlQuery(String jql) {
+    urlBuilder = urlBuilder.addParameter("jql", jql);
+    return this;
+  }
+
+  @Override
+  public JiraUrlBuilder jqlQuery(JQL aJQL) {
+    return jqlQuery(aJQL.build());
+  }
+
+  @Override
+  public JiraUrlBuilder startAt(int startAt) {
+    urlBuilder = urlBuilder.addParameter("startat", StringUtils.stringify(startAt));
+    return this;
+  }
+
+  @Override
+  public JiraUrlBuilder maxResults(int results) {
+    urlBuilder = urlBuilder.addParameter("maxresults", StringUtils.stringify(results));
+    return this;
+  }
+
+  @Override
+  public JiraUrlBuilder total(int total) {
+    urlBuilder = urlBuilder.addParameter("total", StringUtils.stringify(total));
+    return this;
+  }
+
+  @Override
+  public JiraUrlBuilder fields(FieldType... fields) {
+    urlBuilder = urlBuilder.addParameter("fields", StringUtils.commaSeparatedList(fields));
+    return this;
+  }
+
+  @Override
+  public JiraUrlBuilder expand(ExpandType... expand) {
+    urlBuilder = urlBuilder.addParameter("expand", StringUtils.commaSeparatedList(expand));
+    return this;
+  }
+
+  public URI build() {
+    if (port == 0) {
+      port(80);
     }
-
-    public static JiraUrlBuilder jiraUrl() {
-        return new JiraUrlBuilder();
+    if (path == null || path.isEmpty()) {
+      path("");
     }
-
-    @Override
-    public JiraUrlBuilder scheme(SchemeType aType) {
-        urlBuilder = urlBuilder.withScheme(aType.getName());
-        return this;
+    if (apiVersion == null) {
+      apiVersion("latest");
     }
-
-    @Override
-    public JiraUrlBuilder host(String host) {
-        urlBuilder = urlBuilder.withHost(host);
-        return this;
-    }
-
-    @Override
-    public JiraUrlBuilder port(int port) {
-        urlBuilder = urlBuilder.withPort(port);
-        return this;
-    }
-
-    @Override
-    public JiraUrlBuilder port(String port) {
-        urlBuilder = urlBuilder.withPort(Integer.parseInt(port));
-        return this;
-    }
-
-    @Override
-    public JiraUrlBuilder path(String path) {
-        urlBuilder = urlBuilder.withPath((path.isEmpty() || path.contains("/")) ? path : "/" + path);
-        return this;
-    }
-
-    @Override
-    public JiraUrlBuilder apiVersion(int version) {
-        return apiVersion("" + version);
-    }
-
-    @Override
-    public JiraUrlBuilder apiVersion(String version) {
-        urlBuilder = urlBuilder.withPath(urlBuilder.path + "/rest/api/" + version + "/");
-        return this;
-    }
-
-    @Override
-    public JiraUrlBuilder jqlQuery(String jql) {
-        urlBuilder = urlBuilder.addParameter("jql", jql);
-        return this;
-    }
-
-    @Override
-    public JiraUrlBuilder jqlQuery(JQL aJQL) {
-        return jqlQuery(aJQL.build());
-    }
-
-    @Override
-    public JiraUrlBuilder startAt(int startAt) {
-        urlBuilder = urlBuilder.addParameter("startat", StringUtils.stringify(startAt));
-        return this;
-    }
-
-    @Override
-    public JiraUrlBuilder maxResults(int results) {
-        urlBuilder = urlBuilder.addParameter("maxresults", StringUtils.stringify(results));
-        return this;
-    }
-
-    @Override
-    public JiraUrlBuilder total(int total) {
-        urlBuilder = urlBuilder.addParameter("total", StringUtils.stringify(total));
-        return this;
-    }
-
-    @Override
-    public JiraUrlBuilder fields(FieldType... fields) {
-        urlBuilder = urlBuilder.addParameter("fields", StringUtils.commaSeparatedList(fields));
-        return this;
-    }
-
-    @Override
-    public JiraUrlBuilder expand(ExpandType... expand) {
-        urlBuilder = urlBuilder.addParameter("expand", StringUtils.commaSeparatedList(expand));
-        return this;
-    }
-
-    public URI build() {
-        return urlBuilder.toUri();
-    }
+    return urlBuilder.toUri();
+  }
 }
