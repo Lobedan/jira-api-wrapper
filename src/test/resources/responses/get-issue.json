@@ -1,0 +1,267 @@
+{
+  "expand": "renderedFields,names,schema,transitions,operations,editmeta,changelog",
+  "id": "1",
+  "self": "http://example.com/rest/api/latest/issue/40373",
+  "key": "TEST-1234",
+  "fields": {
+    "progress": {
+      "progress": 0,
+      "total": 0
+    },
+    "summary": "Jira-Test-Task",
+    "timetracking": {},
+    "issuetype": {
+      "self": "http://example.com/rest/api/latest/issuetype/7",
+      "id": "7",
+      "description": "Eine grosse User Story, die heruntergebrochen werden muss.",
+      "iconUrl": "http://example.com/images/icons/issuetypes/epic.png",
+      "name": "Epic",
+      "subtask": false
+    },
+    "security": {
+      "self": "http://example.com/rest/api/latest/securitylevel/10000",
+      "id": "10000",
+      "description": "Jeder darf diesen Vorgang einsehen",
+      "name": "Public"
+    },
+    "resolution": null,
+    "resolutiondate": null,
+    "timespent": null,
+    "reporter": {
+      "self": "http://example.com/rest/api/latest/user?username=hans",
+      "name": "hans",
+      "emailAddress": "markus.franz@ippen-digital.de",
+      "avatarUrls": {
+        "16x16": "http://example.com/secure/useravatar?size=xsmall&avatarId=10142",
+        "24x24": "http://example.com/secure/useravatar?size=small&avatarId=10142",
+        "32x32": "http://example.com/secure/useravatar?size=medium&avatarId=10142",
+        "48x48": "http://example.com/secure/useravatar?avatarId=10142"
+      },
+      "displayName": "Markus Franz",
+      "active": true
+    },
+    "aggregatetimeoriginalestimate": 230400,
+    "created": "2014-08-01T16:18:12.000+0200",
+    "updated": "2014-08-01T16:18:12.000+0200",
+    "priority": {
+      "self": "http://example.com/rest/api/latest/priority/6",
+      "iconUrl": "http://example.com/images/icons/priority_normal.gif",
+      "name": "Normal",
+      "id": "6"
+    },
+    "description": "Just a simple jira test task ",
+    "duedate": null,
+    "issuelinks": [],
+    "watches": {
+      "self": "http://example.com/rest/api/latest/issue/DIH-24/watchers",
+      "watchCount": 0,
+      "isWatching": false
+    },
+    "worklog": {
+      "startAt": 0,
+      "maxResults": 20,
+      "total": 0,
+      "worklogs": []
+    },
+    "subtasks": [
+      {
+        "id": "40374",
+        "key": "DIH-25",
+        "self": "http://example.com/rest/api/latest/issue/40374",
+        "fields": {
+          "summary": "Spring-XD Runtime Integrationssystem ",
+          "status": {
+            "self": "http://example.com/rest/api/latest/status/6",
+            "description": "Vorgang ist erledigt und abgenommen",
+            "iconUrl": "http://example.com/images/icons/statuses/closed.png",
+            "name": "Geschlossen",
+            "id": "6"
+          },
+          "priority": {
+            "self": "http://example.com/rest/api/latest/priority/6",
+            "iconUrl": "http://example.com/images/icons/priority_normal.gif",
+            "name": "Normal",
+            "id": "6"
+          },
+          "issuetype": {
+            "self": "http://example.com/rest/api/latest/issuetype/5",
+            "id": "5",
+            "description": "Die Unteraufgabe des Vorgangs",
+            "iconUrl": "http://example.com/images/icons/issuetypes/subtask_alternate.png",
+            "name": "Unteraufgabe",
+            "subtask": true
+          }
+        }
+      },
+      {
+        "id": "40375",
+        "key": "DIH-26",
+        "self": "http://example.com/rest/api/latest/issue/40375",
+        "fields": {
+          "summary": "Spring-XD Runtime Produktion",
+          "status": {
+            "self": "http://example.com/rest/api/latest/status/1",
+            "description": "Der Vorgang ist offen und bereit zugeteilt zu werden um mit der Arbeit zu beginnen",
+            "iconUrl": "http://example.com/images/icons/statuses/open.png",
+            "name": "Offen",
+            "id": "1"
+          },
+          "priority": {
+            "self": "http://example.com/rest/api/latest/priority/6",
+            "iconUrl": "http://example.com/images/icons/priority_normal.gif",
+            "name": "Normal",
+            "id": "6"
+          },
+          "issuetype": {
+            "self": "http://example.com/rest/api/latest/issuetype/5",
+            "id": "5",
+            "description": "Die Unteraufgabe des Vorgangs",
+            "iconUrl": "http://example.com/images/icons/issuetypes/subtask_alternate.png",
+            "name": "Unteraufgabe",
+            "subtask": true
+          }
+        }
+      },
+      {
+        "id": "40377",
+        "key": "DIH-27",
+        "self": "http://example.com/rest/api/latest/issue/40377",
+        "fields": {
+          "summary": "Deployment-Spring-XD-Module",
+          "status": {
+            "self": "http://example.com/rest/api/latest/status/3",
+            "description": "Der Vorgang ist zugeteilt und wird bearbeitet",
+            "iconUrl": "http://example.com/images/icons/statuses/inprogress.png",
+            "name": "In Arbeit",
+            "id": "3"
+          },
+          "priority": {
+            "self": "http://example.com/rest/api/latest/priority/6",
+            "iconUrl": "http://example.com/images/icons/priority_normal.gif",
+            "name": "Normal",
+            "id": "6"
+          },
+          "issuetype": {
+            "self": "http://example.com/rest/api/latest/issuetype/5",
+            "id": "5",
+            "description": "Die Unteraufgabe des Vorgangs",
+            "iconUrl": "http://example.com/images/icons/issuetypes/subtask_alternate.png",
+            "name": "Unteraufgabe",
+            "subtask": true
+          }
+        }
+      },
+      {
+        "id": "40669",
+        "key": "DIH-38",
+        "self": "http://example.com/rest/api/latest/issue/40669",
+        "fields": {
+          "summary": "Spring-XD Runtime Monitoring ",
+          "status": {
+            "self": "http://example.com/rest/api/latest/status/3",
+            "description": "Der Vorgang ist zugeteilt und wird bearbeitet",
+            "iconUrl": "http://example.com/images/icons/statuses/inprogress.png",
+            "name": "In Arbeit",
+            "id": "3"
+          },
+          "priority": {
+            "self": "http://example.com/rest/api/latest/priority/6",
+            "iconUrl": "http://example.com/images/icons/priority_normal.gif",
+            "name": "Normal",
+            "id": "6"
+          },
+          "issuetype": {
+            "self": "http://example.com/rest/api/latest/issuetype/5",
+            "id": "5",
+            "description": "Die Unteraufgabe des Vorgangs",
+            "iconUrl": "http://example.com/images/icons/issuetypes/subtask_alternate.png",
+            "name": "Unteraufgabe",
+            "subtask": true
+          }
+        }
+      },
+      {
+        "id": "40673",
+        "key": "DIH-40",
+        "self": "http://example.com/rest/api/latest/issue/40673",
+        "fields": {
+          "summary": "Spring-XD Runtime Environment-Management",
+          "status": {
+            "self": "http://example.com/rest/api/latest/status/5",
+            "description": "Vorgang wurde fertig bearbeitet",
+            "iconUrl": "http://example.com/images/icons/statuses/resolved.png",
+            "name": "Erledigt",
+            "id": "5"
+          },
+          "priority": {
+            "self": "http://example.com/rest/api/latest/priority/6",
+            "iconUrl": "http://example.com/images/icons/priority_normal.gif",
+            "name": "Normal",
+            "id": "6"
+          },
+          "issuetype": {
+            "self": "http://example.com/rest/api/latest/issuetype/5",
+            "id": "5",
+            "description": "Die Unteraufgabe des Vorgangs",
+            "iconUrl": "http://example.com/images/icons/issuetypes/subtask_alternate.png",
+            "name": "Unteraufgabe",
+            "subtask": true
+          }
+        }
+      }
+    ],
+    "status": {
+      "self": "http://example.com/rest/api/latest/status/1",
+      "description": "Der Vorgang ist offen und bereit zugeteilt zu werden um mit der Arbeit zu beginnen",
+      "iconUrl": "http://example.com/images/icons/statuses/open.png",
+      "name": "Offen",
+      "id": "1"
+    },
+    "labels": ["label1"],
+    "workratio": -1,
+    "assignee": {
+      "self": "http://example.com/rest/api/latest/user?username=hans",
+      "name": "hans",
+      "emailAddress": "hans.franz@example.com",
+      "avatarUrls": {
+        "16x16": "http://example.com/secure/useravatar?size=xsmall&avatarId=10142",
+        "24x24": "http://example.com/secure/useravatar?size=small&avatarId=10142",
+        "32x32": "http://example.com/secure/useravatar?size=medium&avatarId=10142",
+        "48x48": "http://example.com/secure/useravatar?avatarId=10142"
+      },
+      "displayName": "Hans Franz",
+      "active": true
+    },
+    "attachment": [],
+    "aggregatetimeestimate": 58200,
+    "project": {
+      "self": "http://example.com/rest/api/latest/project/10742",
+      "id": "10742",
+      "key": "TEST",
+      "name": "Statistik, Analytik und Berichtswesen",
+      "avatarUrls": {
+        "16x16": "http://example.com/secure/projectavatar?size=xsmall&pid=10742&avatarId=10011",
+        "24x24": "http://example.com/secure/projectavatar?size=small&pid=10742&avatarId=10011",
+        "32x32": "http://example.com/secure/projectavatar?size=medium&pid=10742&avatarId=10011",
+        "48x48": "http://example.com/secure/projectavatar?pid=10742&avatarId=10011"
+      }
+    },
+    "timeestimate": null,
+    "aggregateprogress": {
+      "progress": 234900,
+      "total": 293100,
+      "percent": 80
+    },
+    "lastViewed": "2014-11-20T06:57:59.016+0100",
+    "components": [],
+    "comment": {
+      "startAt": 0,
+      "maxResults": 0,
+      "total": 0,
+      "comments": []
+    },
+    "timeoriginalestimate": null,
+    "aggregatetimespent": 234900
+  }
+}
+

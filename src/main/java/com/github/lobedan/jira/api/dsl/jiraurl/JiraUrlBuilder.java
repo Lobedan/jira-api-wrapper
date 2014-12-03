@@ -1,18 +1,16 @@
 package com.github.lobedan.jira.api.dsl.jiraurl;
 
-import java.net.URI;
-
 import com.github.lobedan.jira.api.domain.dsl.jiraurl.JiraUrl;
 import com.github.lobedan.jira.api.domain.dsl.jql.JQL;
 import com.github.lobedan.jira.api.types.ExpandType;
 import com.github.lobedan.jira.api.types.FieldType;
 import com.github.lobedan.jira.api.types.SchemeType;
 import com.github.lobedan.jira.api.util.StringUtils;
-
+import gumi.builders.UrlBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import gumi.builders.UrlBuilder;
+import java.net.URI;
 
 /**
  * @author svenklemmer
@@ -62,7 +60,7 @@ public final class JiraUrlBuilder implements JiraUrl {
 
   @Override
   public JiraUrlBuilder path(String aPath) {
-    urlBuilder = urlBuilder.withPath((urlBuilder.path != null ? urlBuilder.path : "") + ((aPath.contains("/") ? aPath : "/" + aPath)));
+    urlBuilder = urlBuilder.withPath((urlBuilder.path != null ? urlBuilder.path : "") + aPath);
     this.path = aPath;
     return this;
   }
@@ -74,7 +72,7 @@ public final class JiraUrlBuilder implements JiraUrl {
 
   @Override
   public JiraUrlBuilder apiVersion(String version) {
-    urlBuilder = urlBuilder.withPath(urlBuilder.path.replace("null", "") + "/rest/api/" + version + "/");
+    urlBuilder = urlBuilder.withPath(urlBuilder.path.replace("null", "") + "/rest/api/" + version.replaceAll("/", ""));
     this.apiVersion = version;
     return this;
   }
@@ -122,7 +120,7 @@ public final class JiraUrlBuilder implements JiraUrl {
 
   public URI build() {
     if (port == 0) {
-      port(80);
+//      port(80);
     }
     if (path == null || path.isEmpty()) {
       path("");
@@ -130,6 +128,7 @@ public final class JiraUrlBuilder implements JiraUrl {
     if (apiVersion == null) {
       apiVersion("latest");
     }
+    LOGGER.debug("Returning uri " + urlBuilder.toUri().toString());
     return urlBuilder.toUri();
   }
 }

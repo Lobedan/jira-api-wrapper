@@ -32,14 +32,14 @@ public class JiraUrlBuilderTest {
             .path("/jira")
             .apiVersion(2)
             .build()
-            .toString(), is("http://example.com:8080/jira/rest/api/2/"));
+                .toString(), is("http://example.com:8080/jira/rest/api/2"));
 
     assertThat(
         jiraUrl()
             .scheme(SchemeType.HTTPS)
             .host("example.com")
             .build()
-            .toString(), is("https://example.com:80//rest/api/latest/"));
+                .toString(), is("https://example.com/rest/api/latest"));
 
     assertThat(
         jiraUrl()
@@ -49,18 +49,18 @@ public class JiraUrlBuilderTest {
             .maxResults(50)
             .total(100)
             .build()
-            .toString(), is("http://example.com:80//rest/api/latest/?startat=0&maxresults=50&total=100"));
+                .toString(), is("http://example.com/rest/api/latest?startat=0&maxresults=50&total=100"));
 
     assertThat(
         jiraUrl()
             .scheme(SchemeType.HTTPS)
             .host("example.com")
-            .path("jira")
+                .path("/jira")
             .apiVersion(2)
             .fields(FieldType.ASSIGNEE, FieldType.COMMENT)
             .expand(ExpandType.CHANGELOG)
             .build()
-            .toString(), is("https://example.com:80/jira/rest/api/2/?fields=assignee%2Ccomment&expand=changelog"));
+                .toString(), is("https://example.com/jira/rest/api/2?fields=assignee%2Ccomment&expand=changelog"));
   }
 
   @Test
@@ -83,7 +83,7 @@ public class JiraUrlBuilderTest {
             )
             .build()
             .toString(),
-        is("http://example.com:8080/jira/rest/api/latest/?jql=reporter%20%3D%20Markus%20OR%20assignee%20%3D%20Sven%20AND%20created%20CHANGED%20after%202012-02-13"));
+            is("http://example.com:8080/jira/rest/api/latest?jql=reporter%20%3D%20Markus%20OR%20assignee%20%3D%20Sven%20AND%20created%20CHANGED%20after%202012-02-13"));
 
       assertThat(
               jiraUrl()
@@ -105,6 +105,6 @@ public class JiraUrlBuilderTest {
                       )
                       .build()
                       .toString(),
-              is("http://example.com:8080/jira/rest/api/latest/?jql=reporter%20%3D%20Markus%20OR%20assignee%20%3D%20Sven%20AND%20created%20CHANGED%20after%202012-02-13%20AND%20status%20CHANGED%20FROM%20Open%20TO%20Closed"));
+              is("http://example.com:8080/jira/rest/api/latest?jql=reporter%20%3D%20Markus%20OR%20assignee%20%3D%20Sven%20AND%20created%20CHANGED%20after%202012-02-13%20AND%20status%20CHANGED%20FROM%20Open%20TO%20Closed"));
   }
 }

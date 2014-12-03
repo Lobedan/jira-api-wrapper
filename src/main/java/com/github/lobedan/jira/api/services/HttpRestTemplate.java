@@ -1,7 +1,5 @@
 package com.github.lobedan.jira.api.services;
 
-import java.net.URI;
-
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
@@ -11,8 +9,11 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.Assert;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+
+import java.net.URI;
 
 /**
  * implementation of {@link org.springframework.web.client.RestTemplate} which special basic auth
@@ -78,7 +79,7 @@ public class HttpRestTemplate extends RestTemplate {
   }
 
   private HttpHeaders getHeaders() {
-    org.springframework.util.Assert.notNull(credentials);
+    Assert.notNull(credentials, "You must provide some credentials");
     HttpHeaders headers = new HttpHeaders();
     String cred = credentials.getUserName() + ":" + credentials.getPassword();
     byte[] base64Token = Base64.encodeBase64(cred.getBytes());

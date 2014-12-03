@@ -1,13 +1,10 @@
 package com.github.lobedan.jira.api.services;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import com.github.lobedan.jira.api.domain.jira.Issue;
 import com.github.lobedan.jira.api.dsl.jiraurl.JiraUrlBuilder;
 import com.github.lobedan.jira.api.exceptions.IssueNotFoundException;
-
+import com.github.lobedan.jira.api.exceptions.NoUpdateIssueException;
+import com.github.lobedan.jira.api.exceptions.ServerNotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +14,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.web.client.HttpClientErrorException;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Basic CRUD service to work with issues
@@ -41,7 +43,7 @@ public class DefaultIssueService implements IssueService, HttpRestTemplateAware 
     Assert.notNull(baseUrlBuilder.build());
     ResponseEntity<Issue> response = restTemplate.exchange(baseUrlBuilder.build().toString() + "/issue/" + key,
                                                            HttpMethod.GET, Issue.class);
-    if (response.getBody() != null) {
+    if (response.getBody() != null && response.getBody().getKey() != null) {
       return response.getBody();
     } else {
       throw new IssueNotFoundException("Could not find Issue with key or ID " + key);
@@ -75,24 +77,34 @@ public class DefaultIssueService implements IssueService, HttpRestTemplateAware 
   @Override
   public HttpStatus updateIssue(String key, String[] newLabels) {
     String changeJSON = "{"
-                        + "\"update\":"
-                        + "{"
-                        + "\"labels\" : ["
-                        + "{"
-                        + "\"set\" :[";
+            + "\"update\":"
+            + "{"
+            + "\"labels\" : ["
+            + "{"
+            + "\"set\" :[";
     for (String l : newLabels) {
       changeJSON += "\"" + l + "\",";
     }
     changeJSON += "\"\""
-                  + "]"
-                  + "}"
-                  + "]"
-                  + "}"
-                  + "}";
-
-    ResponseEntity<String> responseEntity = restTemplate.exchange(baseUrlBuilder.build().toString() + "/issue/" + key,
-                                                                  HttpMethod.PUT, String.class, changeJSON);
-    return responseEntity.getStatusCode();
+            + "]"
+            + "}"
+            + "]"
+            + "}"
+            + "}";
+    ResponseEntity<String> responseEntity = null;
+    try {
+      responseEntity = restTemplate.exchange(baseUrlBuilder.build().toString() + "/issue/" + key,
+              HttpMethod.PUT, String.class, changeJSON);
+    } catch (HttpClientErrorException e) {
+      if (e.getStatusCode().equals(HttpStatus.NOT_FOUND)) {
+        throw new ServerNotFoundException("Could not connect to jira server");
+      }
+    }
+    if (responseEntity != null && responseEntity.getBody() != null) {
+      return responseEntity.getStatusCode();
+    } else {
+      throw new NoUpdateIssueException("Could not update issue " + key + " in jira");
+    }
   }
 
   @Override

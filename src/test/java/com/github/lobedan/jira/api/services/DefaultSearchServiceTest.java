@@ -8,12 +8,9 @@
  */
 package com.github.lobedan.jira.api.services;
 
-import java.net.URISyntaxException;
-
 import com.github.lobedan.jira.api.domain.jira.Search;
 import com.github.lobedan.jira.api.dsl.jiraurl.JiraUrlBuilder;
 import com.github.lobedan.jira.api.types.SchemeType;
-
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,6 +21,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.net.URISyntaxException;
 
 import static com.github.lobedan.jira.api.dsl.jiraurl.JiraUrlBuilder.jiraUrl;
 import static org.hamcrest.CoreMatchers.is;
@@ -55,7 +54,7 @@ public class DefaultSearchServiceTest {
 
   @Test
   public void testCanSearchJiraInstance() throws Exception {
-    assertThat(jiraUrlBuilder.build().toString(), is("http://example.com:80//rest/api/latest/"));
+    assertThat(jiraUrlBuilder.build().toString(), is("http://example.com/rest/api/latest"));
 
     Search testObject = new Search();
     testObject.setTotal(1);
