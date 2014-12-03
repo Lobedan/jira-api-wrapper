@@ -21,7 +21,7 @@ public class JQL {
     }
 
     public void add(String string) {
-        LOGGER.info("added string \"" + string + "\" to stringbuilder");
+        LOGGER.debug("added string \"" + string + "\" to stringbuilder");
         sb.append(string);
     }
 
